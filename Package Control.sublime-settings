@@ -1,0 +1,19 @@
+{
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Alignment",
+		"Better CoffeeScript",
+		"CSS Comments",
+		"Handlebars",
+		"Package Control",
+		"Pretty JSON",
+		"Sass",
+		"SCSS",
+		"SublimeERB",
+		"TrailingSpaces",
+		"VBScript"
+	]
+}

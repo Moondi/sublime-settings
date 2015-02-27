@@ -1,0 +1,46 @@
+[
+    {
+        "class": "tree_row",
+        "attributes": ["selected"],
+        "layer0.opacity": 0.3
+    },
+    {
+        "class": "sidebar_heading",
+        "color": [110, 110, 110],
+        //"font.bold": true, // no change
+        "font.italic": true,
+        "shadow_color": [180, 180, 180]
+        //"shadow_offset": [0, 1] // no change
+    },
+    {
+        "class": "sidebar_tree",
+        "row_padding": [8, 0],
+        "indent": 10,
+        "indent_offset": 15,
+        "indent_top_level": false,
+        "layer0.tint": [39, 40, 34]
+        //"layer0.opacity": 1.0, // no change
+        //"dark_content": false // no change
+    },
+    {
+        "class": "sidebar_label",
+        "color": [152, 152, 152],
+        //"font.bold": false, // no change
+        "font.size": 10
+    },
+    {
+        "class": "sidebar_label",
+        "parents": [{"class": "tree_row", "attributes": ["selected"]}],
+        "color": [220, 220, 220],
+        "shadow_color": [160, 174, 192]
+    },
+    {
+        "class": "sidebar_label",
+        "parents": [{"class": "tree_row", "attributes": ["expandable"]}],
+        "settings": ["bold_folder_labels"],
+        //"font.bold": true, // no change
+        "font.italic": true,
+        "font.size": 10,
+        "color":  [160, 160, 160]
+    }
+]

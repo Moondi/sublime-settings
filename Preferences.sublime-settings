@@ -1,0 +1,25 @@
+{
+	"auto_complete_commit_on_tab": true,
+	"auto_complete_delay": 100,
+	"auto_complete_with_fields": true,
+	"bold_folder_labels": true,
+	"color_scheme": "Packages/Y Moose Y/Moose.tmTheme",
+	"ensure_newline_at_eof_on_save": true,
+	"fade_fold_buttons": false,
+	"find_selected_text": true,
+	"font_face": "Consolas",
+	"font_size": 11,
+	"highlight_modified_tabs": true,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"scroll_past_end": true,
+	"shift_tab_unindent": true,
+	"show_full_path": true,
+	"tab_completion": false,
+	"tab_size": 2,
+	"theme": "Default.sublime-theme",
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true
+}

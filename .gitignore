@@ -1,0 +1,8 @@
+.DS_Store
+Package\ Control.cache/
+Package\ Control.ca-certs/
+Package Control.*
+!Package Control.sublime-settings
+*.chback
+*.cache
+*.tmp
