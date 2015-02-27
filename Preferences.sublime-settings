@@ -3,7 +3,7 @@
 	"auto_complete_delay": 100,
 	"auto_complete_with_fields": true,
 	"bold_folder_labels": true,
-	"color_scheme": "Packages/Y Moose Y/Moose.tmTheme",
+	"color_scheme": "Packages/User/Moose.tmTheme",
 	"ensure_newline_at_eof_on_save": true,
 	"fade_fold_buttons": false,
 	"find_selected_text": true,
