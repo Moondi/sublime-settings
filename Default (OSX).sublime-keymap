@@ -7,10 +7,10 @@
 
   { "keys": ["super+shift+."], "command": "erb" },
 
-  // HTML, XML close tag
+  // HTML, XML close tag - barely working in coffeescript. Works for 'div' and nothing else that I've seen so far
   { "keys": ["/"], "command": "close_tag", "args": { "insert_slash": true }, "context":
     [
-      { "key": "selector", "operator": "equal", "operand": "(text.html, text.xml, source.hbs, text.hbs) - string - comment", "match_all": true },
+      { "key": "selector", "operator": "equal", "operand": "(text.html, text.xml, text.hbs, source.hbs, source.coffee) - string - comment", "match_all": true },
       { "key": "preceding_text", "operator": "regex_match", "operand": ".*<$", "match_all": true },
       { "key": "setting.auto_close_tags" }
     ]
