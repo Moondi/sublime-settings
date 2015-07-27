@@ -1,0 +1,1 @@
+Clone to the Sublime Text 3/Packages/User directory
