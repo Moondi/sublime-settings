@@ -4,7 +4,7 @@
 	"auto_complete_selector": "text.html.erb, source - comment, meta.tag - punctuation.definition.tag.begin",
 	"auto_complete_with_fields": true,
 	"bold_folder_labels": true,
-	"color_scheme": "Packages/User/Moose.tmTheme",
+	"color_scheme": "Packages/User/Moose v2.tmTheme",
 	"drag_text": false,
 	"enable_tab_scrolling": false,
 	"ensure_newline_at_eof_on_save": true,
@@ -17,6 +17,7 @@
 	[
 		"Vintage"
 	],
+	"indent_guide_options": ["draw_normal", "draw_active"],
 	"margin": 0,
 	"rulers": [ 120 ],
 	"scroll_past_end": true,
