@@ -7,6 +7,8 @@
 
   { "keys": ["super+shift+."], "command": "erb" },
 
+  { "keys": ["shift+alt+d"], "command": "schemr_cycle_favorite_schemes", "args": {"direction": "next"}},
+
   // HTML, XML close tag - barely working in coffeescript. Works for 'div' and nothing else that I've seen so far
   { "keys": ["/"], "command": "close_tag", "args": { "insert_slash": true }, "context":
     [

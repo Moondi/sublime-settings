@@ -4,6 +4,7 @@
 	],
 	"installed_packages":
 	[
+		"AAAPackageDev",
 		"Alignment",
 		"Better CoffeeScript",
 		"CJSX Syntax",
@@ -12,6 +13,7 @@
 		"Package Control",
 		"Pretty JSON",
 		"Sass",
+		"Schemr",
 		"SCSS",
 		"SublimeERB",
 		"VBScript"
