@@ -1,0 +1,94 @@
+// For colour names, see http://www.color-blindness.com/color-name-hue/
+//                    or http://chir.ag/projects/name-that-color/
+
+// Greyscale, from lightest to darkest
+$alabaster: #F9F9F9;
+$white-smoke: #F5F5F5;
+$really-light-grey: #EEE;
+$alto: #DDD;
+$light-grey: #CCC;
+$medium-grey: #AAA;
+$grey: #808080;
+$mortar-grey: #545454;
+//$pb-charcoal: #444;
+$mine-shaft: #333;
+
+// Chalk Colours
+$chalk-blue: #128EDB; // The Chalk.com blue
+$danger-red: #E9271F; // Used for delete warnings, etc
+$pumpkin: #FF8F0B; // Used for utility buttons
+$lima: #7ED321;
+$lima-half: #BBE58C;
+
+
+// changes color across all rgb values by a fixed amount, passed in as a decimal percentage
+// variance should be between -1 and 1, positive to lighten, negative to darken
+@function colorLuminance($color, $variance) {
+  @return adjust-color($color, $red: 255*$variance, $blue: 255*$variance, $green: 255*$variance);
+}
+
+// Chalk.com button base
+// Border color should be the same as the background color for buttons with colours
+//   that stand out from their background. Otherwise, a darker border-color can be
+//   specified (typically for really light buttons)
+@mixin flat-button($bg-color, $border-color, $fg-color: white) {
+  @include button-base;
+  margin: 0 auto;
+  padding: 11px 20px; $
+  border: 1px solid $border-color;
+  border-radius: 5px;
+  outline: 0;
+  background: $bg-color;
+  color: $fg-color;
+  font-size: 13px;
+  letter-spacing: 1px;
+  transition: none;
+  &:hover, &:focus {
+    background: colorLuminance($bg-color, -0.1);
+    border-color: colorLuminance($border-color, -0.1);
+    color: $fg-color;
+  }
+  &:disabled, &:hover:disabled, &:focus:disabled {
+    background: colorLuminance($bg-color, 0.1);
+    border-color: colorLuminance($border-color, -0.1); // border always be visible when disabled
+    color: $fg-color;
+  }
+  i {
+    font-size: 13px;
+    margin-right: 7px;
+    vertical-align: middle;
+  }
+  // TODO: Add modifier classes. ie: tall/short/small/large/thin/wide
+}
+input[type="submit"] { border-radius: 5px; } // override foundation default of no radius
+
+// Standard 'positive' action button. ie, save, next, continue, add, etc
+.flat-blue { @include flat-button($chalk-blue, $chalk-blue); }
+
+// Standard 'neutral' action button. ie, back, edit
+.flat-grey { @include flat-button($really-light-grey, $alto, $pb-charcoal); }
+
+// Neutral by default, danger on hover
+.flat-grey-danger {
+  @include flat-button($really-light-grey, $alto, $pb-charcoal);
+  &:hover {
+    background: colorLuminance($danger-red, -0.1);
+    border-color: colorLuminance($danger-red, -0.1);
+    color: white;
+  }
+}
+
+// Standard 'utility' action button
+.flat-bright-orange { @include flat-button($pumpkin, $pumpkin); }
+
+.flat-mortar-grey { @include flat-button($mortar-grey, $mortar-grey); }
+
+// Standard 'negative' action button. ie, delete
+.flat-danger-red { @include flat-button($danger-red, $danger-red); }
+
+
+.flat-white {
+  @include flat-button($white-smoke, $alto, $pb-charcoal);
+  &:hover { background: $alto; }
+}
+
