@@ -19,13 +19,15 @@
     #FFFFFF - white
 
   reds
+    #D12F1D - thunderbird
     #DD3E2A - markboard-red
 
   greens
     #
 
   blues
-    #
+    #788CFF - cornflower-blue
+    #0088FF - azure-radiance
 
   special
     #FF77FF - tracer-pink
@@ -65,6 +67,10 @@
         <key>stackGuide</key>                <string>#444444</string>
       </dict>
     </dict>
+
+    <!-- GENERAL SETTINGS -->
+    <!-- organized in this order https://manual.macromates.com/en/language_grammars -->
+<!-- COMMENT -->
     <dict>
       <key>name</key>         <string>Comment</string>
       <key>scope</key>        <string>comment</string>
@@ -74,86 +80,98 @@
         <key>foreground</key> <string>#788CFF</string> <!-- Blue comments 579AFF 6496F3 6482F3 7A95F5 7D8BF5 789AFF 788CFF -->
       </dict>
     </dict>
+
+<!-- CONSTANT -->
     <dict>
       <key>name</key>         <string>Constant</string>
       <key>scope</key>        <string>constant</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key> <string>#D12F1D</string> <!-- red for constants (numbers included) orig: E600000 -->
+        <!-- Tracer b/c I dont think any language definition is that unspecific -->
+        <key>foreground</key> <string>#FF77FF</string>
+        <!-- <key>foreground</key> <string>#D12F1D</string> -->
       </dict>
     </dict>
     <dict>
-      <key>name</key>         <string>String</string>
-      <key>scope</key>        <string>string</string>
+      <key>name</key>         <string>Number</string>
+      <key>scope</key>        <string>constant.numeric</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key> <string>#9AC23C</string>
+        <key>foreground</key> <string>#D12F1D</string>
       </dict>
     </dict>
     <dict>
-      <key>name</key>         <string>Interpolated String</string>
-      <key>scope</key>        <string>constant.character.escaped, constant.character.escape, string source, string source.ruby</string>
+      <key>name</key>         <string>Constant: Built-in</string>
+      <key>scope</key>        <string>constant.language</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key> <string>#519F50</string>
+        <key>foreground</key> <string>#D12F1D</string>
       </dict>
     </dict>
+    <dict>
+      <key>name</key>         <string>Constant: User-defined</string>
+      <key>scope</key>        <string>constant.character, constant.other</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key> <string>#DD3E2A</string>
+      </dict>
+    </dict>
+
+<!-- ENTITY -->
     <dict>
       <key>name</key>         <string>Entity</string>
       <key>scope</key>        <string>entity</string>
+      <key>settings</key>
+      <dict>
+        <!-- Tracer b/c I dont think any language definition is that unspecific -->
+        <key>foreground</key> <string>#FF77FF</string>
+        <!-- <key>foreground</key> <string>#FFDD00</string> -->
+      </dict>
+    </dict>
+    <dict>
+      <key>name</key>         <string>Class name</string>
+      <key>scope</key>        <string>entity.name.class, entity.name.type.class</string>
       <key>settings</key>
       <dict>
         <key>foreground</key> <string>#FFDD00</string>
       </dict>
     </dict>
     <dict>
-      <key>name</key>         <string>Keyword</string>
-      <key>scope</key>        <string>keyword</string>
+      <key>name</key>         <string>Inherited Class</string>
+      <key>scope</key>        <string>entity.other.inherited-class</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key> <string>#FF9D00</string>
+        <key>fontStyle</key>  <string>italic</string>
+        <key>foreground</key> <string>#80FCFF</string>
       </dict>
     </dict>
     <dict>
-      <key>name</key>         <string>Storage</string>
-      <key>scope</key>        <string>storage</string>
+      <key>name</key>         <string>Function Name</string>
+      <key>scope</key>        <string>entity.name.function</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key> <string>#FF9D00</string> <!--types and stuff (int, public, class, etc) FFEE80 -->
+        <key>fontStyle</key>  <string>italic</string>
+        <key>foreground</key> <string>#FFDD00</string>
       </dict>
     </dict>
     <dict>
-      <key>name</key>         <string>Library function</string>
-      <key>scope</key>        <string>support.function</string>
+      <key>name</key>         <string>Tag Name</string>
+      <key>scope</key>        <string>entity.name.tag, punctuation.definition.tag.begin, punctuation.definition.tag.end</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key> <string>#DA4939</string>
+        <key>foreground</key> <string>#0088FF</string>
       </dict>
     </dict>
     <dict>
-      <key>name</key>         <string>Variable</string>
-      <key>scope</key>        <string>variable</string>
+      <key>name</key>         <string>Tag Attribute</string>
+      <key>scope</key>        <string>entity.other.attribute-name</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key> <string>#CCCCCC</string>
+        <key>foreground</key> <string>#8D80BF</string>
       </dict>
     </dict>
-    <dict>
-      <key>name</key>         <string>Lang Variable</string>
-      <key>scope</key>        <string>variable.language</string>
-      <key>settings</key>
-      <dict>
-        <key>foreground</key> <string>#FF80E1</string>
-      </dict>
-    </dict>
-    <dict>
-      <key>name</key>         <string>Function Call</string>
-      <key>scope</key>        <string>meta.function-call</string>
-      <key>settings</key>
-      <dict>
-        <key>foreground</key> <string>#FFEE80</string>
-      </dict>
-    </dict>
+
+<!-- INVALID -->
     <dict>
       <key>name</key>         <string>Invalid</string>
       <key>scope</key>        <string>invalid</string>
@@ -172,13 +190,106 @@
         <key>foreground</key> <string>#CCCCCC</string>
       </dict>
     </dict>
+
+<!-- KEYWORD -->
     <dict>
-      <key>name</key>         <string>Entity inherited-class</string>
-      <key>scope</key>        <string>entity.other.inherited-class</string>
+      <key>name</key>         <string>Keyword</string>
+      <key>scope</key>        <string>keyword</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key> <string>#FF9D00</string>
+      </dict>
+    </dict>
+
+<!-- MARKUP -->
+    <!-- <dict>
+      <key>name</key>         <string>Raw Markup</string>
+      <key>scope</key>        <string>markup.raw</string>
+      <key>settings</key>
+      <dict>
+        <key>background</key> <string>#8FDDF630</string>
+      </dict>
+    </dict>
+    <dict>
+      <key>name</key>         <string>Block Quote</string>
+      <key>scope</key>        <string>markup.quote</string>
+      <key>settings</key>
+      <dict>
+        <key>background</key> <string>#004480</string>
+      </dict>
+    </dict>
+    <dict>
+      <key>name</key>         <string>List</string>
+      <key>scope</key>        <string>markup.list</string>
+      <key>settings</key>
+      <dict>
+        <key>background</key> <string>#130D26</string>
+      </dict>
+    </dict>
+    <dict>
+      <key>name</key>         <string>Bold Markup</string>
+      <key>scope</key>        <string>markup.bold</string>
+      <key>settings</key>
+      <dict>
+        <key>fontStyle</key>  <string>bold</string>
+        <key>foreground</key> <string>#C1AFFF</string>
+      </dict>
+    </dict>
+    <dict>
+      <key>name</key>         <string>Italic Markup</string>
+      <key>scope</key>        <string>markup.italic</string>
       <key>settings</key>
       <dict>
         <key>fontStyle</key>  <string>italic</string>
-        <key>foreground</key> <string>#80FCFF</string>
+        <key>foreground</key> <string>#B8FFD9</string>
+      </dict>
+    </dict>
+    <dict>
+      <key>name</key>         <string>Heading Markup</string>
+      <key>scope</key>        <string>markup.heading</string>
+      <key>settings</key>
+      <dict>
+        <key>background</key> <string>#001221</string>
+        <key>fontStyle</key>  <string>bold</string>
+        <key>foreground</key> <string>#C8E4FD</string>
+      </dict>
+    </dict> -->
+
+<!-- META -->
+    <dict>
+      <key>name</key>         <string>Function Call</string>
+      <key>scope</key>        <string>meta.function-call</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key> <string>#FFEE80</string>
+      </dict>
+    </dict>
+
+<!-- STORAGE -->
+    <dict>
+      <key>name</key>         <string>Storage</string>
+      <key>scope</key>        <string>storage</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key> <string>#FF9D00</string> <!--types and stuff (int, public, class, etc) FFEE80 -->
+      </dict>
+    </dict>
+
+<!-- STRING -->
+    <dict>
+      <key>name</key>         <string>String</string>
+      <key>scope</key>        <string>string</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key> <string>#9AC23C</string>
+      </dict>
+    </dict>
+    <dict>
+      <key>name</key>         <string>Interpolated String</string>
+      <key>scope</key>        <string>constant.character.escaped, constant.character.escape, string source, string source.ruby</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key> <string>#519F50</string>
       </dict>
     </dict>
     <dict>
@@ -196,6 +307,16 @@
       <key>settings</key>
       <dict>
         <key>foreground</key> <string>#EDEF7D</string>
+      </dict>
+    </dict>
+
+<!-- SUPPORT -->
+    <dict>
+      <key>name</key>         <string>Library function</string>
+      <key>scope</key>        <string>support.function</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key> <string>#DA4939</string>
       </dict>
     </dict>
     <dict>
@@ -222,6 +343,31 @@
         <key>foreground</key> <string>#FF1E00</string>
       </dict>
     </dict>
+
+<!-- VARIABLE -->
+    <dict>
+      <key>name</key>         <string>Variable</string>
+      <key>scope</key>        <string>variable</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key> <string>#CCCCCC</string>
+      </dict>
+    </dict>
+    <dict>
+      <key>name</key>         <string>Lang Variable</string>
+      <key>scope</key>        <string>variable.language</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key> <string>#FF80E1</string>
+      </dict>
+    </dict>
+
+
+
+
+
+
+<!-- C++ -->
     <dict>
       <key>name</key>         <string>C/C++ Preprocessor Line</string>
       <key>scope</key>        <string>meta.preprocessor.c</string>
@@ -238,6 +384,8 @@
         <key>foreground</key> <string>#AFC4DB</string>
       </dict>
     </dict>
+
+<!-- HTML/XML -->
     <dict>
       <key>name</key>         <string>Doctype/XML Processing</string>
       <key>scope</key>        <string>meta.sgml.html meta.doctype, meta.sgml.html meta.doctype entity, meta.sgml.html meta.doctype string, meta.xml-processing, meta.xml-processing entity, meta.xml-processing string</string>
@@ -246,14 +394,16 @@
         <key>foreground</key> <string>#73817D</string>
       </dict>
     </dict>
-    <dict>
+<!--     <dict>
       <key>name</key>         <string>Meta.tag.A</string>
       <key>scope</key>        <string>meta.tag, meta.tag entity</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key> <string>#0088FF</string> <!--css/html/xml tags, look way better being blue 70aeff-->
+        <key>foreground</key> <string>#0088FF</string>
       </dict>
-    </dict>
+    </dict> -->
+
+<!-- CSS -->
     <dict>
       <key>name</key>         <string>css tag-name</string>
       <key>scope</key>        <string>meta.selector.css entity.name.tag</string>
@@ -307,7 +457,7 @@
       <key>scope</key>        <string>meta.property-value support.constant.named-color.css, meta.property-value constant</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key> <string>#EDF080</string>
+        <key>foreground</key> <string>#FF77FF<!-- EDF080 --></string>
       </dict>
     </dict>
     <dict>
@@ -318,6 +468,8 @@
         <key>foreground</key> <string>#EB939A</string>
       </dict>
     </dict>
+
+<!-- DIFFS -->
     <dict>
       <key>name</key>         <string>diff.header</string>
       <key>scope</key>        <string>meta.diff, meta.diff.header</string>
@@ -354,58 +506,6 @@
         <key>foreground</key> <string>#F8F8F8</string>
       </dict>
     </dict>
-    <dict>
-      <key>name</key>         <string>Raw Markup</string>
-      <key>scope</key>        <string>markup.raw</string>
-      <key>settings</key>
-      <dict>
-        <key>background</key> <string>#8FDDF630</string>
-      </dict>
-    </dict>
-    <dict>
-      <key>name</key>         <string>Block Quote</string>
-      <key>scope</key>        <string>markup.quote</string>
-      <key>settings</key>
-      <dict>
-        <key>background</key> <string>#004480</string>
-      </dict>
-    </dict>
-    <dict>
-      <key>name</key>         <string>List</string>
-      <key>scope</key>        <string>markup.list</string>
-      <key>settings</key>
-      <dict>
-        <key>background</key> <string>#130D26</string>
-      </dict>
-    </dict>
-    <dict>
-      <key>name</key>         <string>Bold Markup</string>
-      <key>scope</key>        <string>markup.bold</string>
-      <key>settings</key>
-      <dict>
-        <key>fontStyle</key>  <string>bold</string>
-        <key>foreground</key> <string>#C1AFFF</string>
-      </dict>
-    </dict>
-    <dict>
-      <key>name</key>         <string>Italic Markup</string>
-      <key>scope</key>        <string>markup.italic</string>
-      <key>settings</key>
-      <dict>
-        <key>fontStyle</key>  <string>italic</string>
-        <key>foreground</key> <string>#B8FFD9</string>
-      </dict>
-    </dict>
-    <dict>
-      <key>name</key>         <string>Heading Markup</string>
-      <key>scope</key>        <string>markup.heading</string>
-      <key>settings</key>
-      <dict>
-        <key>background</key> <string>#001221</string>
-        <key>fontStyle</key>  <string>bold</string>
-        <key>foreground</key> <string>#C8E4FD</string>
-      </dict>
-    </dict>
 
 
 <!-- ruby/rails specific stuff far as I've come across... -->
@@ -415,6 +515,14 @@
       <key>settings</key>
       <dict>
         <key>foreground</key> <string>#FF6C5C</string><!-- FF6C5C a lighter red for these variable constant things... (ruby on rails)-->
+      </dict>
+    </dict>
+    <dict>
+      <key>name</key>         <string>Ruby: Symbol</string>
+      <key>scope</key>        <string>constant.other.symbol.ruby</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key> <string>#DD3E2A</string>
       </dict>
     </dict>
     <dict>
