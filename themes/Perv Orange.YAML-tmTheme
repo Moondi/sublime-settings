@@ -1,0 +1,414 @@
+constant:
+  name: Number
+  scope: constant.numeric
+  settings:
+    foreground: '#ACE600'
+  name: Built-in constant
+  scope: constant.language
+  settings:
+    foreground: '#7CA600'
+  name: User-defined constant
+  scope: constant.character, constant.other
+  settings:
+    foreground: '#DCF000'
+
+
+entity:
+  name: Entity
+  scope: entity
+  settings:
+    foreground: '#6680FF'
+  name: Class name
+  scope: entity.name.class
+  settings:
+    foreground: '#6680FF'
+  name: Inherited class
+  scope: entity.other.inherited-class
+  settings:
+    fontStyle: italic
+    foreground: '#66A6FF'
+  name: Function name
+  scope: entity.name.function, meta.function-call.python - punctuation - meta.function-call.arguments.python
+  settings:
+    foreground: '#FF4000'
+  name: Tag name
+  scope: entity.name.tag
+  settings:
+    foreground: '#FF6A00'
+  name: Tag attribute
+  scope: entity.other.attribute-name
+  settings:
+    foreground: '#E58F73'
+
+
+invalid:
+  name: Invalid
+  scope: invalid
+  settings:
+    background: '#FDCA49'
+    foreground: '#FFFFFF'
+  name: Invalid deprecated
+  scope: invalid.deprecated
+  settings:
+    background: '#FF2211'
+    foreground: '#FFFFFF'
+
+
+keyword:
+  name: Keyword
+  scope: keyword
+  settings:
+    foreground: '#FF7F00'
+
+
+storage:
+  name: Storage
+  scope: storage
+  settings:
+    foreground: '#FBDE2D'
+  name: Storage type
+  scope: storage.type
+  settings:
+    fontStyle: italic
+    foreground: '#FDCA49'
+
+
+string:
+  name: String
+  scope: string
+  settings:
+    foreground: '#8F9D6A'
+
+
+support:
+  name: Library function
+  scope: support.function
+  settings:
+    fontStyle: ''
+    foreground: '#FF2211'
+  name: Library constant
+  scope: support.constant
+  settings:
+    fontStyle: ''
+    foreground: '#DCF000'
+  name: Library class/type
+  scope: support.type, support.class
+  settings:
+    fontStyle: italic
+    foreground: '#A6A6FF'
+  name: Library variable
+  scope: support.other.variable
+  settings:
+    fontStyle: underline
+
+
+variable:
+  name: Function argument
+  scope: variable.parameter, meta.function-call.arguments
+  settings:
+    foreground: '#E5A373'
+
+
+
+#   name: Find-in-Files line number
+#   scope: constant.numeric.line-number.find-in-files - match
+#   settings:
+#     foreground: '#C6FF1A25'
+#   name: Find-in-Files filename
+#   scope: entity.name.filename.find-in-files
+#   settings:
+#     background: '#0050A0'
+#     fontStyle: underline
+#     foreground: '#FFFFFF'
+
+
+
+#   name: Ruby regexp punctuation
+#   scope: string.regexp.classic.ruby punctuation.definition.string.ruby
+#   settings:
+#     foreground: '#FF7F00'
+#   name: Ruby Embedded Source Punctuation
+#   scope: string punctuation.section.embedded.ruby
+#   settings:
+#     foreground: '#626B49'
+#   name: Ruby Embedded Source
+#   scope: string source.ruby.embedded.source, string source.ruby.embedded.source punctuation.section.function.ruby
+#   settings:
+#     foreground: '#D2D2D2'
+#   name: Ruby ERB
+#   scope: text.html.ruby source.ruby.rails.embedded.html punctuation.section.embedded.ruby
+#   settings:
+#     foreground: '#ff3322'
+#   name: Ruby ERB Class
+#   scope: text.html.ruby source.ruby.rails.embedded.html variable.other.readwrite.instance.ruby
+#   settings:
+#     foreground: '#6680ff'
+
+
+
+#   name: CSS/SASS/SCSS Punctuation
+#   scope: punctuation.section.function.css, punctuation.definition.constant.css, source.scss
+#     comment.punctuation
+#   settings:
+#     fontStyle: ''
+#     foreground: '#DEDEDE'
+#   name: SASS/SCSS Variables
+#   scope: variable.parameter.sass, support.constant.property-value.css.sass variable
+#   settings:
+#     foreground: '#DEDEDE'
+#   name: CSS/SASS/SCSS Library Functions
+#   scope: keyword.control.at-rule, keyword.other.important.css, keyword.other.default.scss
+#   settings:
+#     foreground: '#FF2211'
+#   name: CSS/SASS/SCSS Function Names
+#   scope: support.function.name.sass, source.css support.function, support.function.misc.scss
+#   settings:
+#     foreground: '#FF4000'
+#   name: CSS/SASS/SCSS Elements
+#   scope: entity.other.attribute-name
+#   settings:
+#     foreground: '#FF7F00'
+#   name: CSS/SASS/SCSS Pseudo Elements
+#   scope: entity.other.attribute-name.pseudo-class, entity.other.attribute-name.pseudo-element
+#   settings:
+#     fontStyle: italic
+#   name: CSS/SASS/SCSS Property Names
+#   scope: support.type.property-name, meta.property-list.css meta.property-name.css
+#   settings:
+#     fontStyle: ''
+#     foreground: '#E58F73'
+#   name: CSS/SASS/SCSS Units
+#   scope: keyword.other.unit.css, constant.other.unit.sass, keyword.other.unit.scss
+#   settings:
+#     foreground: '#FDCA49'
+#   name: CSS/SASS/SCSS Strings
+#   scope: source.css variable.parameter, source.sass variable.parameter, source.scss
+#     variable.parameter
+#   settings:
+#     foreground: '#8F9D6A'
+#   name: CSS/SASS/SCSS Constant Language
+#   scope: meta.property-value.css support.constant, source.sass support.constant, meta.property-value.scss
+#     support.constant
+#   settings:
+#     foreground: '#7CA600'
+#   name: CSS/SASS/SCSS Color Values
+#   scope: constant.other.color.rgb-value.css, constant.other.rgb-value.sass, constant.other.color.rgb-value.scss
+#   settings:
+#     foreground: '#ACE600'
+
+
+
+#   name: JSON Punctuation
+#   scope: punctuation.definition.string.begin.json - meta.structure.dictionary.value.json,
+#     punctuation.definition.string.end.json - meta.structure.dictionary.value.json
+#   settings:
+#     foreground: '#DEDEDE'
+#   name: JSON Structure
+#   scope: meta.structure.dictionary.json string.quoted.double.json
+#   settings:
+#     foreground: '#FF7F00'
+#   name: JSON String
+#   scope: meta.structure.dictionary.value.json string.quoted.double.json
+#   settings:
+#     foreground: '#8F9D6A'
+
+
+
+#   name: YAML Punctuation
+#   scope: punctuation.separator.key-value.yaml
+#   settings:
+#     foreground: '#DEDEDE'
+
+
+
+# #   name: DIFF header text
+# #   scope: meta.diff, meta.diff.header
+# #   settings:
+# #     background: '#5F5A60'
+# #     foreground: '#000000'
+# #   name: DIFF separator line
+# #   scope: meta.separator.diff
+# #   settings:
+# #     foreground: '#9B969C'
+# #   name: DIFF deleted lines
+# #   scope: markup.deleted.diff
+# #   settings:
+# #     foreground: '#FF2211'
+# #   name: DIFF inserted lines
+# #   scope: markup.inserted.diff
+# #   settings:
+# #     foreground: '#8F9D6A'
+
+
+
+# #   name: GitGutter deleted lines
+# #   scope: markup.deleted
+# #   settings:
+# #     foreground: '#FF2211'
+# #   name: GitGutter inserted lines
+# #   scope: markup.inserted
+# #   settings:
+# #     foreground: '#7CA600'
+# #   name: GitGutter changed lines
+# #   scope: markup.changed
+# #   settings:
+# #     foreground: '#FF6A00'
+# #   name: GitGutter ignored
+# #   scope: markup.ignored.git_gutter
+# #   settings:
+# #     foreground: '#565656'
+# #   name: GitGutter untracked
+# #   scope: markup.untracked.git_gutter
+# #   settings:
+# #     foreground: '#565656'
+
+
+
+# #   name: Git Modified Line
+# #   scope: git.changes.x
+# #   settings:
+# #     background: '#FF4000'
+# #   name: Git Added Line
+# #   scope: git.changes.+
+# #   settings:
+# #     background: '#8F9D6A'
+# #   name: Git Remove Line
+# #   scope: git.changes.-
+# #   settings:
+# #     background: '#FF2211'
+
+
+
+# #   name: Markdown header text
+# #   scope: markup.heading.markdown, markup.heading.1.markdown, markup.heading.2.markdown,
+# #     entity.name.section.markdown, markup.heading.markdown string.other.link
+# #   settings:
+# #     fontStyle: bold
+# #     foreground: '#FF6A00'
+# #   name: Markdown keywords
+# #   scope: punctuation.definition.metadata.markdown, punctuation.definition.link.markdown,
+# #     punctuation.definition.raw.markdown, punctuation.definition.string.markdown, punctuation.definition.string.begin.markdown,
+# #     punctuation.definition.string.end.markdown, punctuation.definition.constant.begin.markdown,
+# #     punctuation.definition.constant.end.markdown, punctuation.definition.constant.markdown,
+# #     punctuation.definition.blockquote.markdown, punctuation.definition.heading.markdown,
+# #     punctuation.definition.list_item.markdown, meta.separator.markdown
+# #   settings:
+# #     fontStyle: ''
+# #     foreground: '#E5A373'
+# #   name: Markdown links
+# #   scope: meta.image.inline.markdown, markup.underline.link.markdown
+# #   settings:
+# #     foreground: '#5F5A60'
+# #   name: Markdown raw block
+# #   scope: markup.raw.block.markdown
+# #   settings:
+# #     foreground: '#E58F73'
+# #   name: Markdown link text
+# #   scope: meta.paragraph.markdown string.other.link, meta.paragraph.list.markdown string.other.link,
+# #     string.other.link.description.title.markdown
+# #   settings:
+# #     foreground: '#DEDEDE'
+# #   name: Markdown raw inline text
+# #   scope: markup.raw.inline.markdown
+# #   settings:
+# #     fontStyle: italic
+# #     foreground: '#E58F73'
+# #   name: Markdown bold
+# #   scope: markup.bold.markdown
+# #   settings:
+# #     fontStyle: bold
+# #   name: Markdown italic
+# #   scope: markup.italic.markdown
+# #   settings:
+# #     fontStyle: italic
+
+
+
+# #   name: reStructuredText tags
+# #   scope: meta.other.directive.restructuredtext, meta.raw.block.restructuredtext, meta.raw.block.restructuredtext
+# #   settings:
+# #     foreground: '#FDCA49'
+# #   name: reStructuredText directives
+# #   scope: entity.name.tag.restructuredtext, meta.raw.block.restructuredtext meta.raw.block.restructuredtext
+# #   settings:
+# #     foreground: '#FF4000'
+# #   name: reStructuredText keywords
+# #   scope: punctuation.definition.directive.restructuredtext, punctuation.definition.field.restructuredtext,
+# #     punctuation.definition.heading.restructuredtext, punctuation.definition.intepreted.restructuredtext,
+# #     punctuation.definition.link.restructuredtext, punctuation.definition.link.restructuredtext,
+# #     punctuation.definition.link.restructuredtext, punctuation.definition.link.restructuredtext,
+# #     punctuation.definition.location.restructuredtext, punctuation.definition.raw.restructuredtext,
+# #     punctuation.definition.raw.restructuredtext, punctuation.definition.string.restructuredtext,
+# #     punctuation.separator.key-value.restructuredtext, meta.link.reference string.other.link.title.restructuredtext
+# #     - punctuation.definition.italic
+# #   settings:
+# #     fontStyle: ''
+# #     foreground: '#FF6A00'
+# #   name: reStructuredText link
+# #   scope: meta.link.inline.restructuredtext markup.underline.link.restructuredtext
+# #   settings:
+# #     foreground: '#5F5A60'
+# #   name: reStructuredText link anchor
+# #   scope: meta.link.reference.def.restructuredtext string.other.link.title.restructuredtext
+# #   settings:
+# #     foreground: '#ACE600'
+# #   name: reStructuredText raw block
+# #   scope: markup.other.command.restructuredtext, markup.raw.restructuredtext
+# #   settings:
+# #     foreground: '#E58F73'
+# #   name: reStructuredText raw inline
+# #   scope: markup.raw.restructuredtext - meta.raw.block.restructuredtext
+# #   settings:
+# #     fontStyle: italic
+# #     foreground: '#E58F73'
+# #   name: reStructuredText link text
+# #   scope: meta.link.inline.restructuredtext string.other.link.title.restructuredtext
+# #   settings:
+# #     foreground: '#DEDEDE'
+# #   name: reStructuredText bold
+# #   scope: markup.bold.restructuredtext
+# #   settings:
+# #     fontStyle: bold
+# #   name: reStructuredText italic
+# #   scope: markup.italic.restructuredtext
+# #   settings:
+# #     fontStyle: italic
+
+
+
+# #   name: SublimeLinter Annotations
+# #   scope: sublimelinter.annotations
+# #   settings:
+# #     background: '#6680FF'
+# #     foreground: '#DEDEDE'
+# #   name: SublimeLinter Error Outline
+# #   scope: sublimelinter.outline.illegal
+# #   settings:
+# #     background: '#FF2211'
+# #     foreground: '#DEDEDE'
+# #   name: SublimeLinter Error Underline
+# #   scope: sublimelinter.underline.illegal
+# #   settings:
+# #     background: '#FFE792'
+# #   name: SublimeLinter Warning Outline
+# #   scope: sublimelinter.outline.warning
+# #   settings:
+# #     background: '#FF6A00'
+# #     foreground: '#DEDEDE'
+# #   name: SublimeLinter Warning Underline
+# #   scope: sublimelinter.underline.warning
+# #   settings:
+# #     background: '#FFE792'
+# #   name: SublimeLinter Violation Outline
+# #   scope: sublimelinter.outline.violation
+# #   settings:
+# #     background: '#CC66FF33'
+# #     foreground: '#DEDEDE'
+# #   name: SublimeLinter Violation Underline
+# #   scope: sublimelinter.underline.violation
+# #   settings:
+# #     background: '#FFE792'
+
+
+
+# # uuid: FFC5C692-05C6-4E8A-820C-AE457C1FAAE2
