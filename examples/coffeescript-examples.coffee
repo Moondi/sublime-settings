@@ -7,6 +7,8 @@ fill = (container, liquid = "coffee") ->
 
 
 
+
+
 # Objects and Arrays
 song = ["do", "re", "mi", "fa", "so"]
 
@@ -32,12 +34,16 @@ log object.class
 
 
 
+
+
 # Lexical Scoping and Variable Safety
 outer = 1
 changeNumbers = ->
   inner = -1
   outer = 10
 inner = changeNumbers()
+
+
 
 
 
@@ -51,6 +57,8 @@ else
   showIt()
 
 date = if friday then sue else jill
+
+
 
 
 
@@ -80,6 +88,8 @@ awardMedals contenders...
 alert "Gold: " + gold
 alert "Silver: " + silver
 alert "The Field: " + rest
+
+
 
 
 
@@ -120,6 +130,8 @@ for filename in list
 
 
 
+
+
 # Array Slicing and Splicing with Ranges
 numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
@@ -134,6 +146,8 @@ copy    = numbers[..]
 numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 numbers[3..6] = [-3, -4, -5, -6]
+
+
 
 
 
@@ -162,6 +176,8 @@ alert(
 
 
 
+
+
 # Operators and Aliases
 -7 % 5 == -2 # The remainder of 7 / 5
 -7 %% 5 == 3 # n %% 5 is always between 0 and 4
@@ -182,6 +198,8 @@ print inspect "My name is #{@name}"
 
 
 
+
+
 # The Existential Operator
 solipsism = true if mind? and not world?
 
@@ -191,6 +209,8 @@ speed ?= 15
 footprints = yeti ? "bear"
 
 zip = lottery.drawWinner?().address?.zipcode
+
+
 
 
 
@@ -219,6 +239,9 @@ tom.move()
 
 String::dasherize = ->
   this.replace /_/g, "-"
+
+
+
 
 
 # Destructuring Assignment
@@ -262,6 +285,8 @@ tim = new Person age: 4
 
 
 
+
+
 # Bound Functions, Generator Functions
 Account = (customer, cart) ->
   @customer = customer
@@ -281,10 +306,14 @@ window.ps or= perfectSquares()
 
 
 
+
+
 # Embedded JavaScript
 hi = `function() {
   return [document.title, "Hello JavaScript"].join(": ");
 }`
+
+
 
 
 
@@ -311,6 +340,8 @@ grade = switch
 
 
 
+
+
 # Try/Catch/Finally
 try
   allHellBreaksLoose()
@@ -322,10 +353,14 @@ finally
 
 
 
+
+
 # Chained Comparisons
 cholesterol = 127
 
 healthy = 200 > cholesterol > 60
+
+
 
 
 
@@ -352,6 +387,8 @@ html = """
 SkinnyMochaHalfCaffScript Compiler v1.0
 Released under the MIT License
 ###
+
+
 
 
 

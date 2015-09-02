@@ -75,8 +75,14 @@ ColorPicker = Chalk.Shared.ColorPicker
     else
       saveText = if @props.isCreating then 'Create' else 'Save'
 
-    <Modal className='edit-unit-modal' isOpen={@props.isOpen} onClickOut={@props.onClickOut unless @state.saving}>
-      <div className='modal-topbar'>{editCreate} Unit</div>
+    <Modal className='edit-unit-modal' aria-hidden='' isOpen2={@props.isOpen} onClickOut={@props.onClickOut unless @state.saving}>
+      <div className='modal-topbar'>
+        {@props.manyBlahs.map (aBlah) ->
+          <blah></blah>}
+        Unit
+      </div>
+      <div className={wee: -> asdfasdf} onClick={@props.onSwitchEditMode}
+        dangerouslySetInnerHTML={{__html: @props.contents or @props.placeholder}}/>
       <div className='modal-section'>
         <ColorPicker color={@state.color} selectColor={@selectColor}/>
         <div className='color-picker-offset row'>
@@ -84,7 +90,7 @@ ColorPicker = Chalk.Shared.ColorPicker
             <label className='sub-shout'>
               Number
               <input ref='number' type='number' min='1' defaultValue={@state.unit.number unless @props.isCreating}/>
-            </label>
+            </label></label></label></label>
           </div>
           <div></div>
           <div className='small-10 columns'>
