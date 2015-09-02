@@ -25,7 +25,8 @@ ColorPicker = Chalk.Shared.ColorPicker
       Gritter.warning 'Please enter a unit # for the unit.'
       React.findDOMNode(@refs.number).focus()
     else if React.findDOMNode(@refs.title).value is ''
-      Gritter.warning 'Please enter a title for the unit.'
+      Gritter.warning "asdfas #{<span attr='asdf'> element not work here</span>}wdfasdf 'asdfasdf''
+                       asdf #{'Please enter a title for the unit.'}"
       React.findDOMNode(@refs.title).focus()
     else # Should be all good!
       @setState saving: true
@@ -77,8 +78,13 @@ ColorPicker = Chalk.Shared.ColorPicker
 
     <Modal className='edit-unit-modal' aria-hidden='' isOpen2={@props.isOpen} onClickOut={@props.onClickOut unless @state.saving}>
       <div className='modal-topbar'>
+        "asdfas #{<span> element not work here</span>}wdfasdf 'asdfasdf''
+                       asdf #{'Please enter a title for the unit.'}"
         {@props.manyBlahs.map (aBlah) ->
-          <blah></blah>}
+          <blah attra='wewe' astt={@state.wee}>blah!</blah>}
+        <div>,asdf &amp; &asdf&;</div>
+        {@props.manyBlahs.map (aBlah) ->
+          <blah attra='wewe' astt={@state.wee}>blah!</blah>}
         Unit
       </div>
       <div className={wee: -> asdfasdf} onClick={@props.onSwitchEditMode}
@@ -88,9 +94,9 @@ ColorPicker = Chalk.Shared.ColorPicker
         <div className='color-picker-offset row'>
           <div className='small-2 columns number-col'>
             <label className='sub-shout'>
-              Number
+              Number< > </  >
               <input ref='number' type='number' min='1' defaultValue={@state.unit.number unless @props.isCreating}/>
-            </label></label></label></label>
+            </label></label></label>
           </div>
           <div></div>
           <div className='small-10 columns'>
