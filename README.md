@@ -4,4 +4,10 @@ or, if the User directory already has contents, navigate to it and run
 git init  
 git remote add origin git@gitlab.com:moondi/sublime-settings.git  
 git fetch  
-git checkout -t origin/master # May not be needed  
+git checkout -t origin/master # May not be needed
+  
+  
+OR
+  
+  
+git clone git@gitlab.com:moondi/sublime-settings.git
