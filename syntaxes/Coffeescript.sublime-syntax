@@ -59,11 +59,7 @@ contexts:
           >>>=|<>|<|>|!|&&|\.\.(\.)?|\?|\||\|\||\:|\*=|(?<!\()/=|%=|\+=|\-=|&=|
           \^=|\b(?<![\.\$])(instanceof|new|delete|typeof|and|or|is|isnt|not|super)\b
       scope: keyword.operator.coffee
-    - match: '([a-zA-Z\$_](\w|\$|\.)*\s*(?!\::)((:)|(=))(?!(\s*\(.*\))?\s*((=|-)>)))'
-      scope: variable.assignment.coffee
-      captures:
-        4: punctuation.separator.key-value
-        5: keyword.operator.coffee
+    - include: assignment
     - include: destructuring-assignment
     - match: |-
         (?x)
@@ -196,11 +192,12 @@ contexts:
 
 
   # Contexts separated out for readability
+  # Make sure there are (at least some) tests for each of these
   block-string-single:
     - match: "'''"
       scope: punctuation.definition.string.begin.coffee
       push:
-        - meta_scope: string.quoted.heredoc.coffee
+        - meta_scope: string.quoted.single.heredoc.coffee
         - match: "'''"
           scope: punctuation.definition.string.end.coffee
           pop: true
@@ -239,6 +236,13 @@ contexts:
       scope: comment.line.number-sign.coffee
       captures:
         1: punctuation.definition.comment.coffee
+
+  assignment:
+    - match: '([a-zA-Z\$_](\w|\$|\.)*\s*(?!\::)((:)|(=))(?!(\s*\(.*\))?\s*((=|-)>)))'
+      scope: variable.assignment.coffee
+      captures:
+        4: punctuation.separator.key-value
+        5: keyword.operator.coffee
 
   destructuring-assignment:
     - match: '(?<=\s|^)([\[\{])(?=.*?[\]\}]\s+[:=])'
