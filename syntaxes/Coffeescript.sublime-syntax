@@ -221,13 +221,11 @@ contexts:
 
   double_quoted_string:
     - match: '"'
-      captures:
-        0: punctuation.definition.string.begin.coffee
+      scope: punctuation.definition.string.begin.coffee
       push:
         - meta_scope: string.quoted.double.coffee
         - match: '"'
-          captures:
-            0: punctuation.definition.string.end.coffee
+          scope: punctuation.definition.string.end.coffee
           pop: true
         - match: '\\(x\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)'
           scope: constant.character.escape.coffee
@@ -239,13 +237,11 @@ contexts:
 
   interpolated-coffee:
     - match: '\#\{'
-      captures:
-        0: punctuation.section.embedded.coffee
+      scope: punctuation.section.embedded.coffee
       push:
         - meta_scope: source.coffee.embedded.source
         - match: '\}'
-          captures:
-            0: punctuation.section.embedded.coffee
+          scope: punctuation.section.embedded.coffee
           pop: true
         - include: main
 
@@ -255,13 +251,11 @@ contexts:
 
   single_quoted_string:
     - match: "'"
-      captures:
-        0: punctuation.definition.string.begin.coffee
+      scope: punctuation.definition.string.begin.coffee
       push:
         - meta_scope: string.quoted.single.coffee
         - match: "'"
-          captures:
-            0: punctuation.definition.string.end.coffee
+          scope: punctuation.definition.string.end.coffee
           pop: true
         - match: '\\(x\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)'
           scope: constant.character.escape.coffee
@@ -269,5 +263,3 @@ contexts:
   variable-name:
     - match: '([a-zA-Z\$_]\w*(\.\w+)*)'
       scope: variable.assignment.coffee
-      captures:
-        1: variable.assignment.coffee
