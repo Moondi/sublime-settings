@@ -48,10 +48,10 @@ hi = `function() { return [document.title, "Hello JavaScript\?"].join(": "); }`
 
 # block-comment
 ### @something something ###
-# <- source.coffee comment.block.coffee punctuation.definition.comment.coffee
+# <- source.coffee comment.block.coffee punctuation.definition.comment.begin.coffee
 #   ^ source.coffee comment.block.coffee storage.type.annotation.coffeescript
 #              ^ source.coffee comment.block.coffee
-#                        ^ source.coffee comment.block.coffee punctuation.definition.comment.coffee
+#                        ^ source.coffee comment.block.coffee punctuation.definition.comment.end.coffee
 
 
 
@@ -66,10 +66,33 @@ hi = `function() { return [document.title, "Hello JavaScript\?"].join(": "); }`
 
 
 
-# inline-comment
-something = something_else # a comment
-#                          ^ source.coffee comment.line.number-sign.coffee punctuation.definition.comment.coffee
-#                            ^ source.coffee comment.line.number-sign.coffee
+# block-regex
+OPERATOR = /// ^ (
+#          ^ source.coffee string.regexp.block.coffee punctuation.definition.regex.begin.coffee
+  ?: [-=]>             # function
+# ^ source.coffee string.regexp.block.coffee
+#                      ^ source.coffee string.regexp.block.coffee comment.line.number-sign.coffee punctuation.definition.comment.coffee
+#                        ^ source.coffee string.regexp.block.coffee comment.line.number-sign.coffee
+   | [-+*/%<>&|^!?=]=  # compound assign / compare
+   | >>>=?             # zero-fill right shift
+   | ([-+:])\1         # doubles
+   | ([&|<>])\2=?      # logic / shift
+   | \?\.              # soak access
+   | \.{2,3}
+   | #{this_is_possible_too}
+#    ^ source.coffee string.regexp.block.coffee source.coffee.embedded.source punctuation.section.embedded.coffee
+#      ^ source.coffee string.regexp.block.coffee source.coffee.embedded.source
+///
+# <- source.coffee string.regexp.block.coffee punctuation.definition.regex.end.coffee
+
+
+
+
+
+# regex
+regex = /asdf/g
+#       ^ source.coffee string.regexp.coffee
+#         ^ source.coffee string.regexp.coffee
 
 
 

@@ -27,15 +27,8 @@ contexts:
     - include: embedded-javascript
     - include: block-comment
     - include: line-comment
-    - match: "/{3}"
-      push:
-        - meta_scope: string.regexp.coffee
-        - match: "/{3}[imgy]{0,4}"
-          pop: true
-        - include: interpolated-coffee
-        - include: inline-comment
-    - match: '/(?![\s=/*+{}?])(\\.|.)*?/[igmy]{0,4}(?![a-zA-Z0-9])'
-      scope: string.regexp.coffee
+    - include: block-regex
+    - include: regex
     - match: |-
         (?x)
           \b(?<![\.\$])(
@@ -218,11 +211,11 @@ contexts:
 
   block-comment:
     - match: (?<!#)###(?!#)
-      scope: punctuation.definition.comment.coffee
+      scope: punctuation.definition.comment.begin.coffee
       push:
         - meta_scope: comment.block.coffee
         - match: '###(?:[ \t]*\n)'
-          scope: punctuation.definition.comment.coffee
+          scope: punctuation.definition.comment.end.coffee
           pop: true
         - match: '@\w*'
           scope: storage.type.annotation.coffeescript
@@ -233,11 +226,23 @@ contexts:
       captures:
         1: punctuation.definition.comment.coffee
 
-  inline-comment:
-    - match: (?<!\\)(#).*$\n?
-      scope: comment.line.number-sign.coffee
-      captures:
-        1: punctuation.definition.comment.coffee
+  block-regex:
+    - match: '///'
+      scope: punctuation.definition.regex.begin.coffee
+      push:
+        - meta_scope: string.regexp.block.coffee
+        - match: "///[imgy]{0,4}"
+          scope: punctuation.definition.regex.end.coffee
+          pop: true
+        - include: interpolated-coffee
+        - match: (?<!\\)(#).*$\n?
+          scope: comment.line.number-sign.coffee
+          captures:
+            1: punctuation.definition.comment.coffee
+
+  regex:
+    - match: '/(?![\s=/*+{}?])(\\.|.)*?/[igmy]{0,4}(?![a-zA-Z0-9])'
+      scope: string.regexp.coffee
 
   assignment:
     - match: '([a-zA-Z\$_](\w|\$|\.)*\s*(?!\::)((:)|(=))(?!(\s*\(.*\))?\s*((=|-)>)))'
