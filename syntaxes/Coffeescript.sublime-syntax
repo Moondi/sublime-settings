@@ -100,20 +100,7 @@ contexts:
       captures:
         4: punctuation.separator.key-value
         5: keyword.operator.coffee
-    # Destructuring assignment
-    - match: '(?<=\s|^)([\[\{])(?=.*?[\]\}]\s+[:=])'
-      scope: keyword.operator.coffee
-      push:
-        - meta_scope: meta.variable.assignment.destructured.coffee
-        - match: '([\]\}]\s*[:=])'
-          scope: keyword.operator.coffee
-          pop: true
-        # Match other open/close For assignment to nested objects/arrays
-        - match: '([\[\{\]\}])'
-          scope: keyword.operator.coffee
-        - match: '([a-zA-Z\$_]\w*(\.\w+)*)'
-          scope: variable.assignment.coffee
-        - include: instance-variable
+    - include: destructuring-assignment
     - match: |-
         (?x)
           (\s*)
@@ -217,22 +204,13 @@ contexts:
     - match: '\[|\]\s*'
       scope: meta.brace.square.coffee
     - include: instance-variable
-    - include: single_quoted_string
-    - include: double_quoted_string
+    - include: single-quoted-string
+    - include: double-quoted-string
     - include: numeric
 
-  double_quoted_string:
-    - match: '"'
-      scope: punctuation.definition.string.begin.coffee
-      push:
-        - meta_scope: string.quoted.double.coffee
-        - match: '"'
-          scope: punctuation.definition.string.end.coffee
-          pop: true
-        - match: '\\(x\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)'
-          scope: constant.character.escape.coffee
-        - include: interpolated-coffee
 
+
+  # Shared Contexts
   instance-variable:
     - match: '(@)([a-zA-Z_\$]\w*)?'
       scope: variable.other.readwrite.instance.coffee
@@ -247,11 +225,28 @@ contexts:
           pop: true
         - include: main
 
-  numeric:
-    - match: '(?<!\$)\b((0([box])[0-9a-fA-F]+)|([0-9]+(\.[0-9]+)?(e[+\-]?[0-9]+)?))\b'
-      scope: constant.numeric.coffee
+  escaped-character:
+    - match: '\\(x\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)'
+      scope: constant.character.escape.coffee
 
-  single_quoted_string:
+
+  # Contexts separated out for readability
+  destructuring-assignment:
+    - match: '(?<=\s|^)([\[\{])(?=.*?[\]\}]\s+[:=])'
+      scope: keyword.operator.coffee
+      push:
+        - meta_scope: meta.variable.assignment.destructured.coffee
+        - match: '([\]\}]\s*[:=])'
+          scope: keyword.operator.coffee
+          pop: true
+        # Match other open/close For assignment to nested objects/arrays
+        - match: '([\[\{\]\}])'
+          scope: keyword.operator.coffee
+        - match: '([a-zA-Z\$_]\w*(\.\w+)*)'
+          scope: variable.assignment.coffee
+        - include: instance-variable
+
+  single-quoted-string:
     - match: "'"
       scope: punctuation.definition.string.begin.coffee
       push:
@@ -259,5 +254,19 @@ contexts:
         - match: "'"
           scope: punctuation.definition.string.end.coffee
           pop: true
-        - match: '\\(x\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)'
-          scope: constant.character.escape.coffee
+        - include: escaped-character
+
+  double-quoted-string:
+    - match: '"'
+      scope: punctuation.definition.string.begin.coffee
+      push:
+        - meta_scope: string.quoted.double.coffee
+        - match: '"'
+          scope: punctuation.definition.string.end.coffee
+          pop: true
+        - include: escaped-character
+        - include: interpolated-coffee
+
+  numeric:
+    - match: '(?<!\$)\b((0([box])[0-9a-fA-F]+)|([0-9]+(\.[0-9]+)?(e[+\-]?[0-9]+)?))\b'
+      scope: constant.numeric.coffee
