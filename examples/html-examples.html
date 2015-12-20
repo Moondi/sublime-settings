@@ -1,0 +1,50 @@
+<dict>
+  <key>name</key>         <string>Constant</string>
+  <key>scope</key>        <string>constant</string>
+  <key>settings</key>
+  <dict>
+    <key>foreground</key> <string>#D12F1D</string>
+  </dict>
+</dict>
+<div className='modal-section'>
+  <ColorPicker color={@state.color} selectColor={@selectColor}/>
+  <div className='color-picker-offset row'>
+    <div className='small-2 columns number-col'>
+      <label className='sub-shout'>
+        Number
+        <input ref='number' type='number' min='1' defaultValue='asdf'/>
+      </label>
+    </div>
+    <div className='small-10 columns'>
+      <label className='sub-shout'>
+        Title
+        <input ref='title' type='text' defaultValue="{@state.unit.title unless @props.isCreating}"/>
+      </label>
+    </div>
+  </div>
+</div>
+<dict>
+  <key>name&lt; \e \031</key>         <string>Number</string>
+  <key>scope</key>        <string>constant.numeric</string>
+  <key>settings</key>
+  <dict>
+    <key>foreground</key> <string>#D12F1D</string>
+  </dict>
+</dict>
+<dict>
+  <key>name</key>         <string>Constant: Built-in</string>
+  <key>scope</key>        <string>constant.language</string>
+  <key>settings</key>
+  <dict>
+    <key>foreground</key> <string>#D12F1D</string>
+  </dict>
+</dict>
+<dict>
+  <key>name</key>         <string>Constant: User-defined</string>
+  <key>scope</key>        <string>constant.character constant.other</string>
+  <key>settings</key>
+  <dict>
+    <key>fontStyle</key>  <string>italic</string>
+    <key>foreground</key> <string>#FF77FF</string>
+  </dict>
+</dict>
