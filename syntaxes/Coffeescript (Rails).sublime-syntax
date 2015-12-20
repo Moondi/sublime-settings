@@ -1,0 +1,35 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+name: Coffeescript (Rails)
+file_extensions:
+  - coffee.erb
+scope: source.coffee.rails
+contexts:
+  main:
+    - include: block-comment
+    - include: embedded-ruby
+    - include: 'scope:source.coffee'
+
+  block-comment:
+    - match: "<%+#"
+      scope: punctuation.definition.comment.begin.erb
+      push:
+        - meta_scope: comment.block.erb
+        - match: "%>"
+          scope: punctuation.definition.comment.end.erb
+          pop: true
+
+  embedded-ruby:
+    - match: "<%+(?!>)[-=]?"
+      scope: punctuation.section.embedded.begin.ruby
+      push:
+        - meta_scope: source.ruby.rails.erb
+        - match: "-?%>"
+          scope: punctuation.section.embedded.end.ruby
+          pop: true
+        - match: (#).*?(?=-?%>)
+          scope: comment.line.number-sign.ruby
+          captures:
+            1: punctuation.definition.comment.ruby
+        - include: 'scope:source.ruby.rails'

@@ -1,0 +1,43 @@
+# SYNTAX TEST "Packages/User/syntaxes/Coffeescript (Rails).sublime-syntax"
+#
+# These are by no stretch extensive tests
+# Layout:
+# - 5 blank separating different contexts
+# - comment with the name of the context before the test
+# - if there are multple tests for a context:
+#  - separate tests with 1 blank line
+#  - add a comment before each test to describe the case it's testing
+
+
+
+
+
+# block-comment
+<%# block comment %>
+# <- source.coffee.rails comment.block.erb punctuation.definition.comment.begin.erb
+#     ^ source.coffee.rails comment.block.erb
+#                 ^ source.coffee.rails comment.block.erb punctuation.definition.comment.end.erb
+
+
+
+
+
+# embedded-ruby
+<%= a = 1 # inline comment %>
+# <- source.coffee.rails source.ruby.rails.erb punctuation.section.embedded.begin.ruby
+#   ^ source.coffee.rails source.ruby.rails.erb
+#     ^ source.coffee.rails source.ruby.rails.erb keyword.operator.assignment.ruby
+#       ^ source.coffee.rails source.ruby.rails.erb constant.numeric.ruby
+#         ^ source.coffee.rails source.ruby.rails.erb comment.line.number-sign.ruby punctuation.definition.comment.ruby
+#           ^ source.coffee.rails source.ruby.rails.erb comment.line.number-sign.ruby
+#                          ^ source.coffee.rails source.ruby.rails.erb punctuation.section.embedded.end.ruby
+
+
+
+
+
+# coffeescript with source.coffee.rails base scope
+a = 1
+# <- source.coffee.rails variable.assignment.coffee
+# ^ source.coffee.rails variable.assignment.coffee keyword.operator.coffee
+#   ^ source.coffee.rails constant.numeric.coffee

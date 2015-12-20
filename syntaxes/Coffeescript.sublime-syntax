@@ -2,7 +2,7 @@
 ---
 # http://www.sublimetext.com/docs/3/syntax.html
 name: CoffeeScript
-comment: "CoffeeScript Syntax: version 1 (Converted from Better Coffeescript on Dec 20/2015)"
+comment: "CoffeeScript Syntax: version 1.01"
 file_extensions:
   - coffee
   - Cakefile
