@@ -54,32 +54,15 @@ contexts:
           pop: true
         - match: '\\(x\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)'
           scope: constant.character.escape.coffee
-    - match: (?<!#)###(?!#)
-      captures:
-        0: punctuation.definition.comment.coffee
-      push:
-        - meta_scope: comment.block.coffee
-        - match: '###(?:[ \t]*\n)'
-          captures:
-            0: punctuation.definition.comment.coffee
-          pop: true
-        - match: '@\w*'
-          scope: storage.type.annotation.coffeescript
-    - match: '(#)(?!\{).*$\n?'
-      scope: comment.line.number-sign.coffee
-      captures:
-        1: punctuation.definition.comment.coffee
+    - include: block-comment
+    - include: line-comment
     - match: "/{3}"
       push:
         - meta_scope: string.regexp.coffee
         - match: "/{3}[imgy]{0,4}"
           pop: true
         - include: interpolated-coffee
-        # Inline comment
-        - match: (?<!\\)(#).*$\n?
-          scope: comment.line.number-sign.coffee
-          captures:
-            1: punctuation.definition.comment.coffee
+        - include: inline-comment
     - match: '/(?![\s=/*+{}?])(\\.|.)*?/[igmy]{0,4}(?![a-zA-Z0-9])'
       scope: string.regexp.coffee
     - match: |-
@@ -230,7 +213,31 @@ contexts:
       scope: constant.character.escape.coffee
 
 
+
   # Contexts separated out for readability
+  block-comment:
+    - match: (?<!#)###(?!#)
+      scope: punctuation.definition.comment.coffee
+      push:
+        - meta_scope: comment.block.coffee
+        - match: '###(?:[ \t]*\n)'
+          scope: punctuation.definition.comment.coffee
+          pop: true
+        - match: '@\w*'
+          scope: storage.type.annotation.coffeescript
+
+  line-comment:
+    - match: '(#)(?!\{).*$\n?'
+      scope: comment.line.number-sign.coffee
+      captures:
+        1: punctuation.definition.comment.coffee
+
+  inline-comment:
+    - match: (?<!\\)(#).*$\n?
+      scope: comment.line.number-sign.coffee
+      captures:
+        1: punctuation.definition.comment.coffee
+
   destructuring-assignment:
     - match: '(?<=\s|^)([\[\{])(?=.*?[\]\}]\s+[:=])'
       scope: keyword.operator.coffee
