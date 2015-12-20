@@ -83,13 +83,11 @@
 
 <!-- CONSTANT -->
     <dict>
-      <key>name</key>         <string>Constant</string>
+      <key>name</key>         <string>Constant (catch-all)</string>
       <key>scope</key>        <string>constant</string>
       <key>settings</key>
       <dict>
-        <!-- Tracer b/c I dont think any language definition is that unspecific -->
-        <key>foreground</key> <string>#FF77FF</string>
-        <!-- <key>foreground</key> <string>#D12F1D</string> -->
+        <key>foreground</key> <string>#D12F1D</string>
       </dict>
     </dict>
     <dict>
