@@ -25,13 +25,11 @@ contexts:
     - include: block-string-single
     - include: block-string-double
     - match: "`"
-      captures:
-        0: punctuation.definition.string.begin.coffee
+      scope: punctuation.definition.string.begin.coffee
       push:
         - meta_scope: string.quoted.script.coffee
         - match: "`"
-          captures:
-            0: punctuation.definition.string.end.coffee
+          scope: punctuation.definition.string.end.coffee
           pop: true
         - match: '\\(x\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)'
           scope: constant.character.escape.coffee
