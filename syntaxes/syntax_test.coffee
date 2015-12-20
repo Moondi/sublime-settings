@@ -35,6 +35,17 @@
 
 
 
+# embedded-javascript
+hi = `function() { return [document.title, "Hello JavaScript\?"].join(": "); }`
+#    ^ source.coffee string.quoted.script.coffee punctuation.definition.string.begin.coffee
+#        ^ source.coffee string.quoted.script.coffee
+#                                                           ^ source.coffee string.quoted.script.coffee constant.character.escape.coffee
+#                                                                             ^ source.coffee string.quoted.script.coffee punctuation.definition.string.end.coffee
+
+
+
+
+
 # block-comment
 ### @something something ###
 # <- source.coffee comment.block.coffee punctuation.definition.comment.coffee

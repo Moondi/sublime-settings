@@ -24,15 +24,7 @@ contexts:
         2: support.class.coffee
     - include: block-string-single
     - include: block-string-double
-    - match: "`"
-      scope: punctuation.definition.string.begin.coffee
-      push:
-        - meta_scope: string.quoted.script.coffee
-        - match: "`"
-          scope: punctuation.definition.string.end.coffee
-          pop: true
-        - match: '\\(x\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)'
-          scope: constant.character.escape.coffee
+    - include: embedded-javascript
     - include: block-comment
     - include: line-comment
     - match: "/{3}"
@@ -189,6 +181,8 @@ contexts:
 
 
 
+
+
   # Contexts separated out for readability
   # Make sure there are (at least some) tests for each of these
   block-string-single:
@@ -211,6 +205,16 @@ contexts:
           pop: true
         - include: escaped-character
         - include: interpolated-coffee
+
+  embedded-javascript:
+    - match: "`"
+      scope: punctuation.definition.string.begin.coffee
+      push:
+        - meta_scope: string.quoted.script.coffee
+        - match: "`"
+          scope: punctuation.definition.string.end.coffee
+          pop: true
+        - include: escaped-character
 
   block-comment:
     - match: (?<!#)###(?!#)
