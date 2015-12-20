@@ -102,15 +102,17 @@ contexts:
         5: keyword.operator.coffee
     # Destructuring assignment
     - match: '(?<=\s|^)([\[\{])(?=.*?[\]\}]\s+[:=])'
-      captures:
-        0: keyword.operator.coffee
+      scope: keyword.operator.coffee
       push:
         - meta_scope: meta.variable.assignment.destructured.coffee
         - match: '([\]\}]\s*[:=])'
-          captures:
-            0: keyword.operator.coffee
+          scope: keyword.operator.coffee
           pop: true
-        - include: variable-name
+        # Match other open/close For assignment to nested objects/arrays
+        - match: '([\[\{\]\}])'
+          scope: keyword.operator.coffee
+        - match: '([a-zA-Z\$_]\w*(\.\w+)*)'
+          scope: variable.assignment.coffee
         - include: instance-variable
     - match: |-
         (?x)
@@ -259,7 +261,3 @@ contexts:
           pop: true
         - match: '\\(x\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)'
           scope: constant.character.escape.coffee
-
-  variable-name:
-    - match: '([a-zA-Z\$_]\w*(\.\w+)*)'
-      scope: variable.assignment.coffee
