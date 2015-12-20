@@ -6,9 +6,7 @@ comment: "CoffeeScript Syntax: version 1 (Converted from Better Coffeescript on 
 file_extensions:
   - coffee
   - Cakefile
-  - coffee.erb
   - cson
-  - cjsx
 first_line_match: ^#!.*\bcoffee
 scope: source.coffee
 contexts:
@@ -247,16 +245,6 @@ contexts:
       push:
         - meta_scope: source.coffee.embedded.source
         - match: '\}'
-          captures:
-            0: punctuation.section.embedded.coffee
-          pop: true
-        - include: main
-    - match: <%
-      captures:
-        0: punctuation.section.embedded.coffee
-      push:
-        - meta_scope: source.coffee.embedded.source
-        - match: "%>"
           captures:
             0: punctuation.section.embedded.coffee
           pop: true
