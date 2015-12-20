@@ -42,7 +42,7 @@ contexts:
           pop: true
         - match: \\.
           scope: constant.character.escape.coffee
-        - include: interpolated_coffee
+        - include: interpolated-coffee
     - match: "`"
       captures:
         0: punctuation.definition.string.begin.coffee
@@ -74,8 +74,12 @@ contexts:
         - meta_scope: string.regexp.coffee
         - match: "/{3}[imgy]{0,4}"
           pop: true
-        - include: interpolated_coffee
-        - include: embedded_comment
+        - include: interpolated-coffee
+        # Inline comment
+        - match: (?<!\\)(#).*$\n?
+          scope: comment.line.number-sign.coffee
+          captures:
+            1: punctuation.definition.comment.coffee
     - match: '/(?![\s=/*+{}?])(\\.|.)*?/[igmy]{0,4}(?![a-zA-Z0-9])'
       scope: string.regexp.coffee
     - match: |-
@@ -106,8 +110,8 @@ contexts:
           captures:
             0: keyword.operator.coffee
           pop: true
-        - include: variable_name
-        - include: instance_variable
+        - include: variable-name
+        - include: instance-variable
         - include: single_quoted_string
         - include: double_quoted_string
         - include: numeric
@@ -213,10 +217,11 @@ contexts:
       scope: meta.brace.round.coffee
     - match: '\[|\]\s*'
       scope: meta.brace.square.coffee
-    - include: instance_variable
+    - include: instance-variable
     - include: single_quoted_string
     - include: double_quoted_string
     - include: numeric
+
   double_quoted_string:
     - match: '"'
       captures:
@@ -229,16 +234,13 @@ contexts:
           pop: true
         - match: '\\(x\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)'
           scope: constant.character.escape.coffee
-        - include: interpolated_coffee
-  embedded_comment:
-    - match: (?<!\\)(#).*$\n?
-      scope: comment.line.number-sign.coffee
-      captures:
-        1: punctuation.definition.comment.coffee
-  instance_variable:
+        - include: interpolated-coffee
+
+  instance-variable:
     - match: '(@)([a-zA-Z_\$]\w*)?'
       scope: variable.other.readwrite.instance.coffee
-  interpolated_coffee:
+
+  interpolated-coffee:
     - match: '\#\{'
       captures:
         0: punctuation.section.embedded.coffee
@@ -249,9 +251,11 @@ contexts:
             0: punctuation.section.embedded.coffee
           pop: true
         - include: main
+
   numeric:
     - match: '(?<!\$)\b((0([box])[0-9a-fA-F]+)|([0-9]+(\.[0-9]+)?(e[+\-]?[0-9]+)?))\b'
       scope: constant.numeric.coffee
+
   single_quoted_string:
     - match: "'"
       captures:
@@ -264,7 +268,8 @@ contexts:
           pop: true
         - match: '\\(x\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)'
           scope: constant.character.escape.coffee
-  variable_name:
+
+  variable-name:
     - match: '([a-zA-Z\$_]\w*(\.\w+)*)'
       scope: variable.assignment.coffee
       captures:
