@@ -1,9 +1,43 @@
+# Overview
+# Assignment:
+number   = 42
+opposite = true
+
+# Conditions:
+number = -42 if opposite
+
+# Functions:
+square = (x) -> x * x
+
+# Arrays:
+list = [1, 2, 3, 4, 5]
+
+# Objects:
+math =
+  root:   Math.sqrt
+  square: square
+  cube:   (x) -> x * square x
+
+# Splats:
+race = (winner, runners...) ->
+  print winner, runners
+
+# Existence:
+alert "I knew it!" if elvis?
+
+# Array comprehensions:
+cubes = (math.cube num for num in list)
+
+
+
+''' asdfasdf '''
+
 # Functions:
 square = (x) -> x * x
 cube   = (x) -> square(x) * x
 
 fill = (container, liquid = "coffee") ->
-  "Filling the #{container} with #{liquid}..."
+  "Filling ,asdf &amp; &asdf&; the #{container} with #{liquid}..."
 
 
 
@@ -378,12 +412,30 @@ mobyDick = "Call me Ishmael. Some years ago --
   world..."
 
 html = """
-     <strong>
-       cup of coffeescript
-     </strong>
-     """
+       <strong>
+         cup of coffeescript
+       </strong>
+       """
+
+html = """
+       <strong>
+         #{@something} <- this should be interpolated
+         something "something" 'something'
+         \x12 <- this should show up as an escaped character
+       </strong>
+       """
+
+html = '''
+       <strong>
+         #{@something} <- this should just be a string
+         something "something" 'something'
+         \x12 <- this should just be a string
+       </strong>
+       '''
+
 
 ###
+@something
 SkinnyMochaHalfCaffScript Compiler v1.0
 Released under the MIT License
 ###
