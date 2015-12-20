@@ -4,11 +4,12 @@
 name: CoffeeScript-orig
 comment: "CoffeeScript Syntax: version 1"
 file_extensions:
-  - coffee
-  - Cakefile
-  - coffee.erb
-  - cson
-  - cjsx
+  - blue
+  # - coffee
+  # - Cakefile
+  # - coffee.erb
+  # - cson
+  # - cjsx
 first_line_match: ^#!.*\bcoffee
 scope: source.coffee
 contexts:

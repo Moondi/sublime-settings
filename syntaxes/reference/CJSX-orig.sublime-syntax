@@ -4,11 +4,12 @@
 name: CJSX-orig
 comment: CJSX Syntax
 file_extensions:
-  - cjsx
-  - coffee
-  - Cakefile
-  - coffee.erb
-  - cson
+  - blue
+  # - cjsx
+  # - coffee
+  # - Cakefile
+  # - coffee.erb
+  # - cson
 first_line_match: ^#!.*\bcoffee
 scope: source.coffee
 contexts:
