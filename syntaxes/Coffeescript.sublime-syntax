@@ -22,27 +22,8 @@ contexts:
       captures:
         1: keyword.operator.new.coffee
         2: support.class.coffee
-    - match: "'''"
-      captures:
-        0: punctuation.definition.string.begin.coffee
-      push:
-        - meta_scope: string.quoted.heredoc.coffee
-        - match: "'''"
-          captures:
-            0: punctuation.definition.string.end.coffee
-          pop: true
-    - match: '"""'
-      captures:
-        0: punctuation.definition.string.begin.coffee
-      push:
-        - meta_scope: string.quoted.double.heredoc.coffee
-        - match: '"""'
-          captures:
-            0: punctuation.definition.string.end.coffee
-          pop: true
-        - match: \\.
-          scope: constant.character.escape.coffee
-        - include: interpolated-coffee
+    - include: block-string-single
+    - include: block-string-double
     - match: "`"
       captures:
         0: punctuation.definition.string.begin.coffee
@@ -215,6 +196,27 @@ contexts:
 
 
   # Contexts separated out for readability
+  block-string-single:
+    - match: "'''"
+      scope: punctuation.definition.string.begin.coffee
+      push:
+        - meta_scope: string.quoted.heredoc.coffee
+        - match: "'''"
+          scope: punctuation.definition.string.end.coffee
+          pop: true
+        - include: escaped-character
+
+  block-string-double:
+    - match: '"""'
+      scope: punctuation.definition.string.begin.coffee
+      push:
+        - meta_scope: string.quoted.double.heredoc.coffee
+        - match: '"""'
+          scope: punctuation.definition.string.end.coffee
+          pop: true
+        - include: escaped-character
+        - include: interpolated-coffee
+
   block-comment:
     - match: (?<!#)###(?!#)
       scope: punctuation.definition.comment.coffee
