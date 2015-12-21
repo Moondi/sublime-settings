@@ -4,7 +4,7 @@
 name: JavaScript (Babel)
 file_extensions: [blue] #[js, htc, jsx]
 first_line_match: ^#!\s*/.*\b(node|js)$\n?
-scope: source.js
+scope: source.blue
 
 variables:
   ident: '[_$a-zA-Z][$\w]*'

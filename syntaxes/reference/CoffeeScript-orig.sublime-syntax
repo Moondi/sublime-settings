@@ -11,7 +11,7 @@ file_extensions:
   # - cson
   # - cjsx
 first_line_match: ^#!.*\bcoffee
-scope: source.coffee
+scope: source.blue
 contexts:
   main:
     - match: '(\([^()]*?\))\s*([=-]>)'
