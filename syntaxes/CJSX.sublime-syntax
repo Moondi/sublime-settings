@@ -11,59 +11,112 @@ variables:
 
 contexts:
   main:
-    - match: '(<)({{cjsxIdent}})'
+    - include: illegal-tag
+    - include: opening-tag
+    - include: 'scope:source.coffee'
+
+  illegal-tag:
+    - match: '(<\s*>)|(<\s*\/\s*>)'
+      scope: invalid.illegal.tag.incomplete.cjsx
+
+  opening-tag:
+    - match: "(<)({{cjsxIdent}})"
+      scope: meta.tag.open.cjsx
       captures:
         1: punctuation.definition.tag.begin.cjsx
-        2: entity.name.tag.cjsx
-      set:
-        - meta_scope: tag.open.cjsx
-        - match: '(?=[_$a-zA-Z][-$\w]*)'
-          comment: 'look ahead so each attribute can be matched'
-          push:
-            - meta_scope: meta.tag.attribute.cjsx
-            - match: '[_$a-zA-Z][-$\w]*'
-              scope: entity.other.attribute-name.cjsx
-            - match: '='
-              scope: keyword.operator.assignment.cjsx
-            - include: strings
-            - include: embedded-cjsx
-            - match: (?=/?>)
-              comment: 'look ahead to see if open tag is ending yet'
-              pop: true
-        - match: '/>'
+        2: entity.name.tag.open.cjsx
+      push:
+        - match: (/>)
           comment: 'self-closing'
-          scope: punctuation.definition.tag.end.cjsx
+          scope: meta.tag.open.cjsx punctuation.definition.tag.end.cjsx
           pop: true
-        - match: '>'
-          comment: 'end of open tag'
-          scope: punctuation.definition.tag.end.cjsx
-          set:
+        - match: (>)
+          comment: 'push the contexts that can occur between a pair of opening and closing tags'
+          scope: meta.tag.open.cjsx punctuation.definition.tag.end.cjsx
+          push:
+            - meta_content_scope: meta.tag.contents.cjsx
+            - include: opening-tag
             - include: escaped-character
             - include: html-entity
             - include: embedded-cjsx
-            - match: '(?=<{{cjsxIdent}})'
-              comment: 'look ahead for a nested cjsx element'
-              push: main
-            - match: '(</)({{cjsxIdent}})(>)'
-              scope: tag.close.cjsx
-              captures:
-                1: punctuation.definition.tag.begin.cjsx
-                2: entity.name.tag.cjsx
-                3: punctuation.definition.tag.end.cjsx
+            - match: "(?=(</)({{cjsxIdent}})(>))"
+              comment: 'look ahead for a closing tag'
               pop: true
-            - match: '(<\s*>)|(<\/\s*>)'
-              scope: invalid.illegal.tag.incomplete.cjsx
-    - include: 'scope:source.coffee'
-
-  embedded-cjsx:
-    - match: '{'
-      scope: punctuation.definition.brace.curly.start.cjsx
-      push:
-        - meta_scope: meta.brace.curly.cjsx source.cjsx.embedded.source
-        - match: '}'
-          scope: punctuation.definition.brace.curly.end.cjsx
+        - include: cjsx-attributes
+        - match: "(</)({{cjsxIdent}})(>)"
+          scope: meta.tag.close.cjsx
+          captures:
+            1: punctuation.definition.tag.begin.cjsx
+            2: entity.name.tag.close.cjsx
+            3: punctuation.definition.tag.end.cjsx
           pop: true
-        - include: main
+
+  cjsx-attributes:
+    - match: '(?=[_$a-zA-Z][-$\w]*)'
+      comment: 'look ahead so each attribute can be matched'
+      push:
+        - meta_scope: meta.tag.attribute.cjsx
+        - match: (?=/?>)
+          comment: 'look ahead to see if open tag is ending yet'
+          pop: true
+        - match: '[_$a-zA-Z][-$\w]*'
+          scope: entity.other.attribute-name.cjsx
+        - match: '='
+          scope: keyword.operator.assignment.cjsx
+        - include: single-quoted-string
+        - include: double-quoted-string
+        - include: embedded-cjsx
+
+  # This is a mostly working main context
+  # Problem is that it uses set, and so it wipes the nested contexts
+  # main:
+  #   - match: '(<\s*>)|(<\/\s*>)'
+  #     scope: invalid.illegal.tag.incomplete.cjsx
+  #   - match: '(<)({{cjsxIdent}})'
+  #     captures:
+  #       1: punctuation.definition.tag.begin.cjsx
+  #       2: entity.name.tag.cjsx
+  #     set:
+  #       - meta_scope: tag.open.cjsx
+  #       - match: '<'
+  #         scope: invalid.illegal.tag.start.cjsx
+  #       - match: '(?=[_$a-zA-Z][-$\w]*)'
+  #         comment: 'look ahead so each attribute can be matched'
+  #         push:
+  #           - meta_scope: meta.tag.attribute.cjsx
+  #           - match: '[_$a-zA-Z][-$\w]*'
+  #             scope: entity.other.attribute-name.cjsx
+  #           - match: '='
+  #             scope: keyword.operator.assignment.cjsx
+  #           - include: strings
+  #           - include: embedded-cjsx
+  #           - match: (?=/?>)
+  #             comment: 'look ahead to see if open tag is ending yet'
+  #             pop: true
+  #       - match: '/>'
+  #         comment: 'self-closing'
+  #         scope: punctuation.definition.tag.end.cjsx
+  #         pop: true
+  #       - match: '>'
+  #         comment: 'end of open tag'
+  #         scope: punctuation.definition.tag.end.cjsx
+  #         set:
+  #           - include: escaped-character
+  #           - include: html-entity
+  #           - include: embedded-cjsx
+  #           - match: '(?=<{{cjsxIdent}})'
+  #             comment: 'look ahead for a nested cjsx element'
+  #             push: main
+  #           - match: '(</)({{cjsxIdent}})(>)'
+  #             scope: tag.close.cjsx
+  #             captures:
+  #               1: punctuation.definition.tag.begin.cjsx
+  #               2: entity.name.tag.cjsx
+  #               3: punctuation.definition.tag.end.cjsx
+  #             pop: true
+  #           - match: '(<\s*>)|(<\/\s*>)'
+  #             scope: invalid.illegal.tag.incomplete.cjsx
+  #   - include: 'scope:source.coffee'
 
   escaped-character:
     - match: '\\(x\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)'
@@ -73,12 +126,32 @@ contexts:
     - match: '(&)([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+)(;)'
       scope: constant.character.entity.cjsx
       captures:
-        1: punctuation.definition.entity.cjsx
-        3: punctuation.definition.entity.cjsx
+        1: punctuation.definition.entity.begin.cjsx
+        3: punctuation.definition.entity.end.cjsx
     - match: '&'
       scope: invalid.illegal.bad-ampersand.cjsx
 
-  strings:
+  embedded-cjsx:
+    - match: '{'
+      scope: meta.brace.curly.cjsx punctuation.section.embedded.begin.cjsx
+      push:
+        - meta_scope: source.cjsx.embedded.source
+        - match: '}'
+          scope: meta.brace.curly.cjsx punctuation.section.embedded.end.cjsx
+          pop: true
+        - include: main
+
+  embedded-coffee:
+    - match: '#{'
+      scope: punctuation.section.embedded.begin.cjsx
+      push:
+        - meta_scope: source.coffee.embedded.source
+        - match: '}'
+          scope: punctuation.section.embedded.end.cjsx
+          pop: true
+        - include: 'scope:source.coffee'
+
+  single-quoted-string:
     - match: "'"
       scope: punctuation.definition.string.begin.cjsx
       push:
@@ -88,6 +161,8 @@ contexts:
           pop: true
         - include: escaped-character
         - include: html-entity
+
+  double-quoted-string:
     - match: '"'
       scope: punctuation.definition.string.begin.cjsx
       push:
@@ -97,11 +172,4 @@ contexts:
           pop: true
         - include: escaped-character
         - include: html-entity
-        - match: '\#\{'
-          scope: punctuation.section.embedded.begin.cjsx
-          push:
-            - meta_scope: source.coffee.embedded.source
-            - match: '\}'
-              scope: punctuation.section.embedded.end.cjsx
-              pop: true
-            - include: 'scope:source.coffee'
+        - include: embedded-coffee
