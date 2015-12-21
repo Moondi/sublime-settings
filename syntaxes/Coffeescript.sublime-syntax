@@ -1,14 +1,13 @@
 %YAML 1.2
 ---
 # http://www.sublimetext.com/docs/3/syntax.html
+
 name: CoffeeScript
 comment: "CoffeeScript Syntax: version 1.01"
-file_extensions:
-  - coffee
-  - Cakefile
-  - cson
+file_extensions: [ coffee, Cakefile, cson ]
 first_line_match: ^#!.*\bcoffee
 scope: source.coffee
+
 contexts:
   main:
     - match: '(\([^()]*?\))\s*([=-]>)'
@@ -160,11 +159,11 @@ contexts:
 
   interpolated-coffee:
     - match: '\#\{'
-      scope: punctuation.section.embedded.coffee
+      scope: punctuation.section.embedded.begin.coffee
       push:
         - meta_scope: source.coffee.embedded.source
         - match: '\}'
-          scope: punctuation.section.embedded.coffee
+          scope: punctuation.section.embedded.end.coffee
           pop: true
         - include: main
 
@@ -172,6 +171,14 @@ contexts:
     - match: '\\(x\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)'
       scope: constant.character.escape.coffee
 
+  html-entity:
+    - match: '(&)([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+)(;)'
+      scope: constant.character.entity.coffee
+      captures:
+        1: punctuation.definition.entity.coffee
+        3: punctuation.definition.entity.coffee
+    - match: '&'
+      scope: invalid.illegal.bad-ampersand.coffee
 
 
 
@@ -187,6 +194,7 @@ contexts:
           scope: punctuation.definition.string.end.coffee
           pop: true
         - include: escaped-character
+        - include: html-entity
 
   block-string-double:
     - match: '"""'
@@ -197,6 +205,7 @@ contexts:
           scope: punctuation.definition.string.end.coffee
           pop: true
         - include: escaped-character
+        - include: html-entity
         - include: interpolated-coffee
 
   embedded-javascript:
@@ -208,6 +217,7 @@ contexts:
           scope: punctuation.definition.string.end.coffee
           pop: true
         - include: escaped-character
+        - include: html-entity
 
   block-comment:
     - match: (?<!#)###(?!#)
@@ -275,6 +285,7 @@ contexts:
           scope: punctuation.definition.string.end.coffee
           pop: true
         - include: escaped-character
+        - include: html-entity
 
   double-quoted-string:
     - match: '"'
@@ -285,6 +296,7 @@ contexts:
           scope: punctuation.definition.string.end.coffee
           pop: true
         - include: escaped-character
+        - include: html-entity
         - include: interpolated-coffee
 
   numeric:

@@ -1,10 +1,11 @@
 %YAML 1.2
 ---
 # http://www.sublimetext.com/docs/3/syntax.html
+
 name: Coffeescript (Rails)
-file_extensions:
-  - coffee.erb
+file_extensions: [ coffee.erb ]
 scope: source.coffee.rails
+
 contexts:
   main:
     - include: block-comment
