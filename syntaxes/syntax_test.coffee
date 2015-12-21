@@ -1,6 +1,5 @@
 # SYNTAX TEST "Packages/User/syntaxes/Coffeescript.sublime-syntax"
 #
-# These are by no stretch extensive tests
 # Layout:
 # - 5 blank separating different contexts
 # - comment with the name of the context before the test
@@ -10,37 +9,68 @@
 
 
 
+# instance-variable
+@something
+# <- source.coffee variable.other.readwrite.instance.coffee
+
+
+
+
+
+# interpolated-coffee
+"#{something}"
+#^ source.coffee string.quoted.double.coffee source.coffee.embedded.source punctuation.section.embedded.begin.coffee
+# ^ source.coffee string.quoted.double.coffee source.coffee.embedded.source punctuation.section.embedded.begin.coffee
+#    ^ source.coffee string.quoted.double.coffee source.coffee.embedded.source
+#           ^ source.coffee string.quoted.double.coffee source.coffee.embedded.source punctuation.section.embedded.end.coffee
+
+
+
+
+
+# html-entity
+'&middot; &'
+#^ source.coffee string.quoted.single.coffee constant.character.entity.coffee punctuation.definition.entity.begin.coffee
+#   ^ source.coffee string.quoted.single.coffee constant.character.entity.coffee
+#       ^ source.coffee string.quoted.single.coffee constant.character.entity.coffee punctuation.definition.entity.end.coffee
+#         ^ source.coffee string.quoted.single.coffee invalid.illegal.bad-ampersand.coffee
+
+
+
 
 
 # block-string-single
-''' #{@something} \x12 '''
+''' #{@something} \x12 &middot;'''
 # <- source.coffee string.quoted.single.heredoc.coffee punctuation.definition.string.begin.coffee
 #   ^ source.coffee string.quoted.single.heredoc.coffee
 #                 ^ source.coffee string.quoted.single.heredoc.coffee constant.character.escape.coffee
-#                      ^ source.coffee string.quoted.single.heredoc.coffee punctuation.definition.string.end.coffee
+#                          ^ source.coffee string.quoted.single.heredoc.coffee constant.character.entity.coffee
+#                              ^ source.coffee string.quoted.single.heredoc.coffee punctuation.definition.string.end.coffee
 
 
 
 
 
 # block-string-double
-""" something #{@something} \x12 """
+""" something #{something} \x12 &middot;"""
 # <- string.quoted.double.heredoc.coffee punctuation.definition.string.begin.coffee
 #   ^ source.coffee string.quoted.double.heredoc.coffee
-#             ^ source.coffee string.quoted.double.heredoc.coffee source.coffee.embedded.source punctuation.section.embedded.coffee
+#                  ^ source.coffee string.quoted.double.heredoc.coffee source.coffee.embedded.source
 #                           ^ source.coffee string.quoted.double.heredoc.coffee constant.character.escape.coffee
-#                                ^ source.coffee string.quoted.double.heredoc.coffee punctuation.definition.string.end.coffee
+#                                  ^ source.coffee string.quoted.double.heredoc.coffee constant.character.entity.coffee
+#                                       ^ source.coffee string.quoted.double.heredoc.coffee punctuation.definition.string.end.coffee
 
 
 
 
 
 # embedded-javascript
-hi = `function() { return [document.title, "Hello JavaScript\?"].join(": "); }`
+hi = `function() { return [document.title, "Hello &middot; JavaScript\?"].join(": "); }`
 #    ^ source.coffee string.quoted.script.coffee punctuation.definition.string.begin.coffee
 #        ^ source.coffee string.quoted.script.coffee
-#                                                           ^ source.coffee string.quoted.script.coffee constant.character.escape.coffee
-#                                                                             ^ source.coffee string.quoted.script.coffee punctuation.definition.string.end.coffee
+#                                                    ^ source.coffee string.quoted.script.coffee constant.character.entity.coffee
+#                                                                    ^ source.coffee string.quoted.script.coffee constant.character.escape.coffee
+#                                                                                      ^ source.coffee string.quoted.script.coffee punctuation.definition.string.end.coffee
 
 
 
@@ -80,7 +110,6 @@ OPERATOR = /// ^ (
    | \?\.              # soak access
    | \.{2,3}
    | #{this_is_possible_too}
-#    ^ source.coffee string.regexp.block.coffee source.coffee.embedded.source punctuation.section.embedded.coffee
 #      ^ source.coffee string.regexp.block.coffee source.coffee.embedded.source
 ///
 # <- source.coffee string.regexp.block.coffee punctuation.definition.regex.end.coffee
@@ -134,26 +163,25 @@ class Person
 
 
 # single-quoted-string
-'something \x12 \"wee\"'
+'something \x12 \"wee\" &middot;'
 # <- source.coffee string.quoted.single.coffee punctuation.definition.string.begin.coffee
 # ^ source.coffee string.quoted.single.coffee
 #          ^ source.coffee string.quoted.single.coffee constant.character.escape.coffee
-#                      ^ source.coffee string.quoted.single.coffee punctuation.definition.string.end.coffee
+#                           ^ source.coffee string.quoted.single.coffee constant.character.entity.coffee
+#                               ^ source.coffee string.quoted.single.coffee punctuation.definition.string.end.coffee
 
 
 
 
 
 # double-quoted-string
-"something \x12 \"wee\" #{something}"
+"something \x12 \"wee\" #{something} &middot;"
 # <- source.coffee string.quoted.double.coffee punctuation.definition.string.begin.coffee
 # ^ source.coffee string.quoted.double.coffee
 #          ^ source.coffee string.quoted.double.coffee constant.character.escape.coffee
-#                       ^ source.coffee string.quoted.double.coffee source.coffee.embedded.source punctuation.section.embedded.coffee
-#                        ^ source.coffee string.quoted.double.coffee source.coffee.embedded.source punctuation.section.embedded.coffee
 #                          ^ source.coffee string.quoted.double.coffee source.coffee.embedded.source
-#                                  ^ source.coffee string.quoted.double.coffee source.coffee.embedded.source punctuation.section.embedded.coffee
-#                                   ^ source.coffee string.quoted.double.coffee punctuation.definition.string.end.coffee
+#                                      ^ source.coffee string.quoted.double.coffee constant.character.entity.coffee
+#                                            ^ source.coffee string.quoted.double.coffee punctuation.definition.string.end.coffee
 
 
 
