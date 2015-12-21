@@ -1,3 +1,74 @@
+
+# https://facebook.github.io/react/docs/jsx-gotchas.html
+# These all display: First · Second
+<div>First &middot; Second</div>
+<div>{'First · Second'}</div>
+<div>{'First \u00b7 Second'}</div>
+<div>{'First ' + String.fromCharCode(183) + ' Second'}</div>
+<div>{['First ', <span>&middot;</span>, ' Second']}</div>
+<div dangerouslySetInnerHTML={{__html: 'First &middot; Second'}} />
+
+# This, however, displays: First &middot; Second
+# This is because React escapes all the strings you are displaying
+# in order to prevent a wide range of XSS attacks by default.
+<div>{'First &middot; Second'}</div>
+
+
+
+@setState color: '128EDB'
+<div>@state.color</div> # displays: @state.color
+<div>{@state.color}</div> # displays: 128EDB
+<div>#{@state.color}</div> # displays: #128EDB
+<div>"#{@state.color}"</div> # displays: "#128EDB"
+<div>{"#{@state.color}"}</div> # displays: 128EDB
+
+
+
+
+
+<div className="#{React.findDOMNode(@).a}"></div>
+
+
+@props.collection.map (item, index) =>
+  <div key={index}>{item.name}</div>
+
+# Good
+<div>
+  {@props.collection.map (item, index) =>
+      <div key={index}>{item.name}</div>}
+</div>
+
+# Bad
+<div>
+  @props.collection.map (item, index) =>
+      <div key={index}>{item.name}</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Below is the old file
+
+
+
+
+
+
+
+
+
+
+
 #= require ./paranoid_warning_modal
 
 Modal = Chalk.Shared.Modal
@@ -87,7 +158,7 @@ ColorPicker = Chalk.Shared.ColorPicker
           <blah attra='wewe' astt={@state.wee}>blah!</blah>}
         Unit
       </div>
-      <div className={wee: -> asdfasdf} onClick={@props.onSwitchEditMode}
+      <div className={@props.name} onClick={wee: -> i_think_this_has_to_be_a_funtion_name}
         dangerouslySetInnerHTML={{__html: @props.contents or @props.placeholder}}/>
       <div className='modal-section'>
         <ColorPicker color={@state.color} selectColor={@selectColor}/>
@@ -96,7 +167,7 @@ ColorPicker = Chalk.Shared.ColorPicker
             <label className='sub-shout'>
               Number< > </  >
               <input ref='number' type='number' min='1' defaultValue={@state.unit.number unless @props.isCreating}/>
-            </label></label></label>
+            </label>
           </div>
           <div></div>
           <div className='small-10 columns'>
