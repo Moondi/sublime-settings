@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
     <key>scope</key>
-    <string>source.coffee</string>
+    <string>source.cjsx</string>
     <key>settings</key>
     <dict>
         <key>icon</key>
-        <string>file_type_coffeescript</string>
+        <string>file_type_coffeescript_blue</string>
     </dict>
 </dict>
 </plist>
