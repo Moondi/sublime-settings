@@ -1,17 +1,24 @@
 [
+    // NOTE:
+    // All these changes are based off the sublime default theme.
+    // This file only contains overridden and new values.
+    // refer to defaults/Theme - Default/Default.sublime-theme
+
+
+    // Sidebar - row selected
     {
         "class": "tree_row",
         "attributes": ["selected"],
         "layer0.opacity": 0.3
     },
+    // Sidebar - heading (FOLDERS and FILES)
     {
         "class": "sidebar_heading",
         "color": [110, 110, 110],
-        //"font.bold": true, // no change
         "font.italic": true,
         "shadow_color": [180, 180, 180]
-        //"shadow_offset": [0, 1] // no change
     },
+    // Sidebar - general
     {
         "class": "sidebar_tree",
         "row_padding": [8, 0],
@@ -19,28 +26,67 @@
         "indent_offset": 15,
         "indent_top_level": false,
         "layer0.tint": [39, 40, 34]
-        //"layer0.opacity": 1.0, // no change
-        //"dark_content": false // no change
     },
     {
         "class": "sidebar_label",
         "color": [152, 152, 152],
-        //"font.bold": false, // no change
         "font.size": 10
     },
+    // Sidebar - file
     {
         "class": "sidebar_label",
-        "parents": [{"class": "tree_row", "attributes": ["selected"]}],
+        "parents": [{"class": "tree_row", "attributes": ["hover"]}],
         "color": [220, 220, 220],
         "shadow_color": [160, 174, 192]
     },
     {
         "class": "sidebar_label",
+        "parents": [{"class": "tree_row", "attributes": ["selected"]}],
+        "color": [220, 220, 220]
+    },
+    // Sidebar - folder
+    {
+        "class": "sidebar_label",
         "parents": [{"class": "tree_row", "attributes": ["expandable"]}],
-        "settings": ["bold_folder_labels"],
-        //"font.bold": true, // no change
         "font.italic": true,
         "font.size": 10,
-        "color":  [160, 160, 160]
+        "color": [160, 160, 160]
+    },
+    {
+        "class": "sidebar_label",
+        "parents": [{"class": "tree_row", "attributes": ["expandable", "hover"]}],
+        "color": [220, 220, 220]
+    },
+    // Sidebar - fold/unfold icons
+    {
+        "class": "disclosure_button_control",
+        "layer0.texture": "User/Mooseland/arrow_right.png",
+        "layer0.tint": [120, 120, 120],
+        "layer1.texture": "User/Mooseland/arrow_right.png",
+        "layer1.tint": [220, 220, 220],
+        "content_margin": [8, 8, 8, 8]
+    },
+    {
+        "class": "disclosure_button_control",
+        "attributes": ["expanded"],
+        "layer0.texture": "User/Mooseland/arrow_down.png",
+        "layer1.texture": "User/Mooseland/arrow_down.png",
+    },
+
+
+    // Code fold/unfold icons
+    {
+        "class": "fold_button_control",
+        "layer0.texture": "User/Mooseland/arrow_right.png",
+        "layer0.tint": [120, 120, 120],
+        "layer1.texture": "User/Mooseland/arrow_right.png",
+        "layer1.tint": [220, 220, 220],
+        "content_margin": [8, 8, 8, 8]
+    },
+    {
+        "class": "fold_button_control",
+        "attributes": ["expanded"],
+        "layer0.texture": "User/Mooseland/arrow_down.png",
+        "layer1.texture": "User/Mooseland/arrow_down.png",
     }
 ]
