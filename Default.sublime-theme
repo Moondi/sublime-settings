@@ -74,6 +74,19 @@
     },
 
 
+    {
+        // Tabset override for medium-dark colors
+        "class": "tabset_control",
+        "attributes": ["file_medium_dark"],
+        "settings": ["use_tabset_background_color"],
+        // "tint_modifier": {"settings": ["tabset_background_color"] },
+        "tint_modifier": [100, 100, 255, 100],
+        // "tint_modifier": [100, 100, 255, 100], // Customize this in project settings to change the bg
+        "layer1.opacity": 1.0,
+        "layer1.texture": "User/Mooseland/tabset_medium_dark_transparent_background_opaque_bottom.png"
+    },
+
+
     // Code fold/unfold icons
     {
         "class": "fold_button_control",

@@ -15,6 +15,7 @@
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
+		"CSS",
 		"Vintage"
 	],
 	"indent_guide_options":
@@ -23,6 +24,8 @@
 		"draw_active"
 	],
 	"margin": 0,
+	"mooseland_sidebar_tree_xsmall": true,
+	"mooseland_square_tabs": false,
 	"rulers":
 	[
 		120

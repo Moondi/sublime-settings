@@ -7,7 +7,7 @@ file_extensions: [ cjsx, coffee.cjsx ]
 scope: source.cjsx
 
 variables:
-  cjsxIdent: '[_a-zA-Z][-.:\w]*'
+  jsxIdent: '[_a-zA-Z][-.:\w]*'
 
 contexts:
   main:
@@ -20,7 +20,7 @@ contexts:
       scope: invalid.illegal.tag.incomplete.cjsx
 
   opening-tag:
-    - match: "(<)({{cjsxIdent}})"
+    - match: "(<)({{jsxIdent}})"
       scope: meta.tag.open.cjsx
       captures:
         1: punctuation.definition.tag.begin.cjsx
@@ -39,11 +39,12 @@ contexts:
             - include: escaped-character
             - include: html-entity
             - include: embedded-cjsx
-            - match: "(?=(</)({{cjsxIdent}})(>))"
+            - match: "(?=(</)({{jsxIdent}})(>))"
               comment: 'look ahead for a closing tag'
               pop: true
-        - include: cjsx-attributes
-        - match: "(</)({{cjsxIdent}})(>)"
+        - include: jsx-spread-attribute
+        - include: jsx-attributes
+        - match: "(</)({{jsxIdent}})(>)"
           scope: meta.tag.close.cjsx
           captures:
             1: punctuation.definition.tag.begin.cjsx
@@ -51,7 +52,12 @@ contexts:
             3: punctuation.definition.tag.end.cjsx
           pop: true
 
-  cjsx-attributes:
+  jsx-spread-attribute:
+    - match: '(?={\.\.\.)|(?={\s\.\.\.)'
+      comment: 'kinda hacky, but works well enough for now. Very unrestrictive'
+    - include: embedded-cjsx
+
+  jsx-attributes:
     - match: '(?=[_$a-zA-Z][-$\w]*)'
       comment: 'look ahead so each attribute can be matched'
       push:

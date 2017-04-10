@@ -8,7 +8,7 @@
     Expanded supported syntaxes with influences from "Neon", "Perv Orange" and "Monokai Extended"
   </string>
   <key>author</key><string>Chris Mundy</string>
-  <!--------------- THE COLOURS --------------->
+  <!-- ============= THE COLOURS ============= -->
   <!--
   greyscale
     #000000 - black
@@ -33,7 +33,7 @@
     #FF77FF - tracer-pink
     #BB664488 - brown-orange-pink used for highlighting selected text
   -->
-  <!--------------- END COLOURS --------------->
+  <!-- ============= END COLOURS ============= -->
   <key>name</key><string>Moose</string>
   <key>settings</key>
   <array>
@@ -65,6 +65,8 @@
         <key>guide</key>                     <string>#444444</string>
         <key>activeGuide</key>               <string>#808080</string>
         <key>stackGuide</key>                <string>#444444</string>
+
+        <!-- Gutter -->
       </dict>
     </dict>
 
@@ -509,7 +511,7 @@
 <!-- ruby/rails specific stuff far as I've come across... -->
     <dict>
       <key>name</key>         <string>Constant (other variable)</string>
-      <key>scope</key>        <string>variable.other.constant</string>
+      <key>scope</key>        <string>variable.other.constant, support.class</string>
       <key>settings</key>
       <dict>
         <key>foreground</key> <string>#FF6C5C</string><!-- FF6C5C a lighter red for these variable constant things... (ruby on rails)-->
@@ -525,7 +527,7 @@
     </dict>
     <dict>
       <key>name</key>         <string>Variable</string>
-      <key>scope</key>        <string>variable.language, variable.other</string> <!-- ruby instance variables -->
+      <key>scope</key>        <string>variable.language, variable.other, variable.parameter</string> <!-- ruby instance variables -->
       <key>settings</key>
       <dict>
         <key>foreground</key> <string>#8F9CC4</string> <!-- orig: D0D0FF -->

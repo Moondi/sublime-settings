@@ -1,16 +1,27 @@
 {
+	"bootstrapped": true,
+	"channels":
+	[
+		"https://packagecontrol.io/channel_v3.json"
+	],
 	"in_process_packages":
 	[
 	],
 	"installed_packages":
 	[
-		"AAAPackageDev",
 		"Alignment",
+		"Babel",
 		"Better CoffeeScript",
 		"CJSX Syntax",
 		"CSS Comments",
+		"CSS3",
+		"EditorConfig",
 		"Handlebars",
+		"MarkdownLivePreview",
+		"OverrideAudit",
 		"Package Control",
+		"PackageDev",
+		"PackageResourceViewer",
 		"Pretty JSON",
 		"Sass",
 		"Schemr",
@@ -19,5 +30,9 @@
 		"SCSS",
 		"SublimeERB",
 		"VBScript"
+	],
+	"repositories":
+	[
+		"https://github.com/math2001/MarkdownLivePreview"
 	]
 }
