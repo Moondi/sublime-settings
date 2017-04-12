@@ -1,0 +1,105 @@
+[
+    // NOTE:
+    // All these changes are based off the sublime default theme.
+    // This file only contains overridden and new values.
+    // refer to defaults/Theme - Default/Default.sublime-theme
+
+
+    // Sidebar - row selected
+    {
+        "class": "tree_row",
+        "attributes": ["selected"],
+        "layer0.opacity": 0.3
+    },
+    // Sidebar - heading (FOLDERS and FILES)
+    {
+        "class": "sidebar_heading",
+        "color": [110, 110, 110],
+        "font.italic": true,
+        "shadow_color": [180, 180, 180]
+    },
+    // Sidebar - general
+    {
+        "class": "sidebar_tree",
+        "row_padding": [8, 0],
+        "indent": 10,
+        "indent_offset": 15,
+        "indent_top_level": false,
+        "layer0.tint": [39, 40, 34]
+    },
+    {
+        "class": "sidebar_label",
+        "color": [152, 152, 152],
+        "font.size": 10
+    },
+    // Sidebar - file
+    {
+        "class": "sidebar_label",
+        "parents": [{"class": "tree_row", "attributes": ["hover"]}],
+        "color": [220, 220, 220],
+        "shadow_color": [160, 174, 192]
+    },
+    {
+        "class": "sidebar_label",
+        "parents": [{"class": "tree_row", "attributes": ["selected"]}],
+        "color": [220, 220, 220]
+    },
+    // Sidebar - folder
+    {
+        "class": "sidebar_label",
+        "parents": [{"class": "tree_row", "attributes": ["expandable"]}],
+        "font.italic": true,
+        "font.size": 10,
+        "color": [160, 160, 160]
+    },
+    {
+        "class": "sidebar_label",
+        "parents": [{"class": "tree_row", "attributes": ["expandable", "hover"]}],
+        "color": [220, 220, 220]
+    },
+    // Sidebar - fold/unfold icons
+    {
+        "class": "disclosure_button_control",
+        "layer0.texture": "User/Mooseland/arrow_right.png",
+        "layer0.tint": [120, 120, 120],
+        "layer1.texture": "User/Mooseland/arrow_right.png",
+        "layer1.tint": [220, 220, 220],
+        "content_margin": [8, 8, 8, 8]
+    },
+    {
+        "class": "disclosure_button_control",
+        "attributes": ["expanded"],
+        "layer0.texture": "User/Mooseland/arrow_down.png",
+        "layer1.texture": "User/Mooseland/arrow_down.png",
+    },
+
+
+    {
+        // Tabset override for medium-dark colors
+        "class": "tabset_control",
+        "attributes": ["file_medium_dark"],
+        "settings": ["use_tabset_background_color"],
+        // "tint_modifier": {"settings": ["tabset_background_color"] },
+        "tint_modifier": [100, 100, 255, 100],
+        // "tint_modifier": [100, 100, 255, 100], // Customize this in project settings to change the bg
+        "layer1.opacity": 1.0,
+        "layer1.texture": "User/Mooseland/tabset_medium_dark_transparent_background_opaque_bottom.png"
+    },
+
+
+    // Code fold/unfold icons
+    {
+        "class": "fold_button_control",
+        "layer0.texture": "User/Mooseland/arrow_right.png",
+        "layer0.tint": [120, 120, 120],
+        "layer1.texture": "User/Mooseland/arrow_right.png",
+        "layer1.tint": [220, 220, 220],
+        "content_margin": [8, 8, 8, 8]
+    },
+    {
+        "class": "fold_button_control",
+        "attributes": ["expanded"],
+        "layer0.texture": "User/Mooseland/arrow_down.png",
+        "layer1.texture": "User/Mooseland/arrow_down.png",
+    }
+]
