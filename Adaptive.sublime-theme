@@ -76,6 +76,16 @@
         "layer0.texture": "User/Mooseland/arrow_down.png",
         "layer1.texture": "User/Mooseland/arrow_down.png",
     },
+    // Folder & File Icons
+    {
+        "class": "icon_folder",
+        "layer0.opacity": 0.4,
+    },
+    {
+        "class": "icon_file_type",
+        "layer0.opacity": 1,
+        "content_margin": 8
+    },
     // Tabs
     {
         "class": "tabset_control",
