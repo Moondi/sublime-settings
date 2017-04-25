@@ -1,0 +1,238 @@
+{
+    "variables": {
+        "jsxIdent": "[_a-zA-Z][-.:\\w]*"
+    }, 
+    "file_extensions": [
+        "cjsx", 
+        "coffee.cjsx"
+    ], 
+    "scope": "source.cjsx", 
+    "contexts": {
+        "embedded-cjsx": [
+            {
+                "push": [
+                    {
+                        "meta_scope": "source.cjsx.embedded.source"
+                    }, 
+                    {
+                        "pop": true, 
+                        "scope": "meta.brace.curly.cjsx punctuation.section.embedded.end.cjsx", 
+                        "match": "}"
+                    }, 
+                    {
+                        "include": "main"
+                    }
+                ], 
+                "scope": "meta.brace.curly.cjsx punctuation.section.embedded.begin.cjsx", 
+                "match": "{"
+            }
+        ], 
+        "jsx-spread-attribute": [
+            {
+                "comment": "kinda hacky, but works well enough for now. Very unrestrictive", 
+                "match": "(?={\\.\\.\\.)|(?={\\s\\.\\.\\.)"
+            }, 
+            {
+                "include": "embedded-cjsx"
+            }
+        ], 
+        "illegal-tag": [
+            {
+                "scope": "invalid.illegal.tag.incomplete.cjsx", 
+                "match": "(<\\s*>)|(<\\s*\\/\\s*>)"
+            }
+        ], 
+        "html-entity": [
+            {
+                "captures": {
+                    "1": "punctuation.definition.entity.begin.cjsx", 
+                    "3": "punctuation.definition.entity.end.cjsx"
+                }, 
+                "scope": "constant.character.entity.cjsx", 
+                "match": "(&)([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+)(;)"
+            }, 
+            {
+                "scope": "invalid.illegal.bad-ampersand.cjsx", 
+                "match": "&"
+            }
+        ], 
+        "double-quoted-string": [
+            {
+                "push": [
+                    {
+                        "meta_scope": "string.quoted.double.cjsx"
+                    }, 
+                    {
+                        "pop": true, 
+                        "scope": "punctuation.definition.string.end.cjsx", 
+                        "match": "\""
+                    }, 
+                    {
+                        "include": "escaped-character"
+                    }, 
+                    {
+                        "include": "html-entity"
+                    }, 
+                    {
+                        "include": "embedded-coffee"
+                    }
+                ], 
+                "scope": "punctuation.definition.string.begin.cjsx", 
+                "match": "\""
+            }
+        ], 
+        "escaped-character": [
+            {
+                "scope": "constant.character.escape.cjsx", 
+                "match": "\\\\(x\\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)"
+            }
+        ], 
+        "opening-tag": [
+            {
+                "push": [
+                    {
+                        "pop": true, 
+                        "comment": "self-closing", 
+                        "scope": "meta.tag.open.cjsx punctuation.definition.tag.end.cjsx", 
+                        "match": "(/>)"
+                    }, 
+                    {
+                        "push": [
+                            {
+                                "meta_content_scope": "meta.tag.contents.cjsx"
+                            }, 
+                            {
+                                "include": "opening-tag"
+                            }, 
+                            {
+                                "include": "escaped-character"
+                            }, 
+                            {
+                                "include": "html-entity"
+                            }, 
+                            {
+                                "include": "embedded-cjsx"
+                            }, 
+                            {
+                                "pop": true, 
+                                "comment": "look ahead for a closing tag", 
+                                "match": "(?=(</)({{jsxIdent}})(>))"
+                            }
+                        ], 
+                        "comment": "push the contexts that can occur between a pair of opening and closing tags", 
+                        "scope": "meta.tag.open.cjsx punctuation.definition.tag.end.cjsx", 
+                        "match": "(>)"
+                    }, 
+                    {
+                        "include": "jsx-spread-attribute"
+                    }, 
+                    {
+                        "include": "jsx-attributes"
+                    }, 
+                    {
+                        "pop": true, 
+                        "captures": {
+                            "1": "punctuation.definition.tag.begin.cjsx", 
+                            "2": "entity.name.tag.close.cjsx", 
+                            "3": "punctuation.definition.tag.end.cjsx"
+                        }, 
+                        "scope": "meta.tag.close.cjsx", 
+                        "match": "(</)({{jsxIdent}})(>)"
+                    }
+                ], 
+                "captures": {
+                    "1": "punctuation.definition.tag.begin.cjsx", 
+                    "2": "entity.name.tag.open.cjsx"
+                }, 
+                "scope": "meta.tag.open.cjsx", 
+                "match": "(<)({{jsxIdent}})"
+            }
+        ], 
+        "embedded-coffee": [
+            {
+                "push": [
+                    {
+                        "meta_scope": "source.coffee.embedded.source"
+                    }, 
+                    {
+                        "pop": true, 
+                        "scope": "punctuation.section.embedded.end.cjsx", 
+                        "match": "}"
+                    }, 
+                    {
+                        "include": "scope:source.coffee"
+                    }
+                ], 
+                "scope": "punctuation.section.embedded.begin.cjsx", 
+                "match": "#{"
+            }
+        ], 
+        "jsx-attributes": [
+            {
+                "push": [
+                    {
+                        "meta_scope": "meta.tag.attribute.cjsx"
+                    }, 
+                    {
+                        "pop": true, 
+                        "comment": "look ahead to see if open tag is ending yet", 
+                        "match": "(?=/?>)"
+                    }, 
+                    {
+                        "scope": "entity.other.attribute-name.cjsx", 
+                        "match": "[_$a-zA-Z][-$\\w]*"
+                    }, 
+                    {
+                        "scope": "keyword.operator.assignment.cjsx", 
+                        "match": "="
+                    }, 
+                    {
+                        "include": "single-quoted-string"
+                    }, 
+                    {
+                        "include": "double-quoted-string"
+                    }, 
+                    {
+                        "include": "embedded-cjsx"
+                    }
+                ], 
+                "comment": "look ahead so each attribute can be matched", 
+                "match": "(?=[_$a-zA-Z][-$\\w]*)"
+            }
+        ], 
+        "main": [
+            {
+                "include": "illegal-tag"
+            }, 
+            {
+                "include": "opening-tag"
+            }, 
+            {
+                "include": "scope:source.coffee"
+            }
+        ], 
+        "single-quoted-string": [
+            {
+                "push": [
+                    {
+                        "meta_scope": "string.quoted.single.cjsx"
+                    }, 
+                    {
+                        "pop": true, 
+                        "scope": "punctuation.definition.string.end.cjsx", 
+                        "match": "'"
+                    }, 
+                    {
+                        "include": "escaped-character"
+                    }, 
+                    {
+                        "include": "html-entity"
+                    }
+                ], 
+                "scope": "punctuation.definition.string.begin.cjsx", 
+                "match": "'"
+            }
+        ]
+    }, 
+    "name": "CJSX"
+}
