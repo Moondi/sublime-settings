@@ -1,0 +1,311 @@
+{
+  "name": "Moose",
+  "author": "Chris Mundy",
+  "uuid": "06CD1FB2-A00A-4F8C-97B2-60E131980454",
+  "comment": "\n    Initially based on \"Cobalt\" by Jacob Rus. (which is based on \"Slate\" by Wilson Miner)\n    Expanded supported syntaxes with influences from \"Neon\", \"Perv Orange\" and \"Monokai Extended\"\n  ",
+  "variables": {
+    "white": "#FFFFFF",
+    "really-light-grey": "#EEEEEE",
+    "alto": "#DDDDDD",
+    "light-grey": "#CCCCCC",
+    "medium-grey": "#AAAAAA",
+    "grey": "#808080",
+    "planboard-charcoal": "#444444",
+    "monokai-grey": "#272822",
+    "black": "#000000",
+    "thunderbird-red": "#D12F1D",
+    "markboard-red": "#DD3E2A",
+    "cornflower-blue": "#788CFF",
+    "azure-radiance": "#0088FF",
+    "tracer-pink": "#FF77FF",
+    "brown-orange-pink": "#BB664488"
+  },
+  "defaults": {
+    "stack_guide": "var(planboard-charcoal)",
+    "tags_foreground": "var(white)",
+    "guide": "var(planboard-charcoal)",
+    "background": "#31332D",
+    "tags_options": "stippled_underline",
+    "accent": "var(azure-radiance)",
+    "selection": "var(brown-orange-pink)",
+    "foreground": "var(light-grey)",
+    "brackets_foreground": "var(markboard-red)",
+    "line_highlight": "var(black)",
+    "bracket_contents_options": "underline",
+    "active_guide": "var(grey)",
+    "brackets_options": "underline",
+    "caret": "var(white)",
+    "bracket_contents_foreground": "var(white)"
+  },
+  "rules": [
+    {
+      "name": "Comment",
+      "scope": "comment",
+      "foreground": "var(cornflower-blue)",
+      "font_style": "italic"
+    },
+    {
+      "name": "Constant (catch-all)",
+      "scope": "constant",
+      "foreground": "var(thunderbird-red)"
+    },
+    {
+      "name": "Number",
+      "scope": "constant.numeric",
+      "foreground": "var(thunderbird-red)"
+    },
+    {
+      "name": "Constant: Built-in",
+      "scope": "constant.language",
+      "foreground": "var(thunderbird-red)"
+    },
+    {
+      "name": "Constant: User-defined",
+      "scope": "constant.character, constant.other",
+      "foreground": "var(markboard-red)"
+    },
+    {
+      "name": "Entity",
+      "scope": "entity",
+      "foreground": "var(tracer-pink)"
+    },
+    {
+      "name": "Class name",
+      "scope": "entity.name.class, entity.name.type.class",
+      "foreground": "#FFDD00"
+    },
+    {
+      "name": "Inherited Class",
+      "scope": "entity.other.inherited-class",
+      "foreground": "#80FCFF",
+      "font_style": "italic"
+    },
+    {
+      "name": "Function Name",
+      "scope": "entity.name.function",
+      "foreground": "#FFDD00",
+      "font_style": "italic"
+    },
+    {
+      "name": "Tag Name",
+      "scope": "entity.name.tag, punctuation.definition.tag.begin, punctuation.definition.tag.end",
+      "foreground": "var(azure-radiance)"
+    },
+    {
+      "name": "Tag Attribute",
+      "scope": "entity.other.attribute-name",
+      "foreground": "#8D80BF"
+    },
+    {
+      "name": "Invalid",
+      "scope": "invalid",
+      "foreground": "#F8F8F8",
+      "background": "#800F00"
+    },
+    {
+      "name": "CSS Depreciated Colour",
+      "scope": "invalid.deprecated.color",
+      "foreground": "var(light-grey)",
+      "background": "#804C00"
+    },
+    {
+      "name": "Keyword",
+      "scope": "keyword",
+      "foreground": "#FF9D00"
+    },
+    {
+      "name": "Function Call",
+      "scope": "meta.function-call",
+      "foreground": "#FFEE80"
+    },
+    {
+      "name": "Storage",
+      "scope": "storage",
+      "foreground": "#FF9D00"
+    },
+    {
+      "name": "String",
+      "scope": "string",
+      "foreground": "#9AC23C"
+    },
+    {
+      "name": "Interpolated String",
+      "scope": "constant.character.escaped, constant.character.escape, string source, string source.ruby",
+      "foreground": "#519F50"
+    },
+    {
+      "name": "String constant",
+      "scope": "string constant",
+      "foreground": "#80FF82"
+    },
+    {
+      "name": "String variable",
+      "scope": "string variable",
+      "foreground": "#EDEF7D"
+    },
+    {
+      "name": "Library function",
+      "scope": "support.function",
+      "foreground": "#DA4939"
+    },
+    {
+      "name": "Support.function",
+      "scope": "support.function",
+      "foreground": "#FFB054"
+    },
+    {
+      "name": "Support.constant",
+      "scope": "support.constant",
+      "foreground": "#EB939A"
+    },
+    {
+      "name": "Exception",
+      "scope": "support.type.exception",
+      "foreground": "#FF1E00"
+    },
+    {
+      "name": "Variable",
+      "scope": "variable",
+      "foreground": "var(light-grey)"
+    },
+    {
+      "name": "Lang Variable",
+      "scope": "variable.language",
+      "foreground": "#FF80E1"
+    },
+    {
+      "name": "C/C++ Preprocessor Line",
+      "scope": "meta.preprocessor.c",
+      "foreground": "#8996A8"
+    },
+    {
+      "name": "C/C++ Preprocessor Directive",
+      "scope": "meta.preprocessor.c keyword",
+      "foreground": "#AFC4DB"
+    },
+    {
+      "name": "Doctype/XML Processing",
+      "scope": "meta.sgml.html meta.doctype, meta.sgml.html meta.doctype entity, meta.sgml.html meta.doctype string, meta.xml-processing, meta.xml-processing entity, meta.xml-processing string",
+      "foreground": "#73817D"
+    },
+    {
+      "name": "css tag-name",
+      "scope": "meta.selector.css entity.name.tag",
+      "foreground": "#9EFFFF"
+    },
+    {
+      "name": "css#id",
+      "scope": "meta.selector.css entity.other.attribute-name.id",
+      "foreground": "#FFB454"
+    },
+    {
+      "name": "css.class",
+      "scope": "meta.selector.css entity.other.attribute-name.class",
+      "foreground": "#5FE461"
+    },
+    {
+      "name": "css property-name:",
+      "scope": "support.type.property-name.css",
+      "foreground": "#9DF39F"
+    },
+    {
+      "name": "css property-value;",
+      "scope": "meta.property-group support.constant.property-value.css, meta.property-value support.constant.property-value.css",
+      "foreground": "#F6F080"
+    },
+    {
+      "name": "css @at-rule",
+      "scope": "meta.preprocessor.at-rule keyword.control.at-rule",
+      "foreground": "#F6AA11"
+    },
+    {
+      "name": "css additional-constants",
+      "scope": "meta.property-value support.constant.named-color.css, meta.property-value constant",
+      "foreground": "var(tracer-pink)"
+    },
+    {
+      "name": "css constructor.argument",
+      "scope": "meta.constructor.argument.css",
+      "foreground": "#EB939A"
+    },
+    {
+      "name": "diff.header",
+      "scope": "meta.diff, meta.diff.header",
+      "foreground": "#F8F8F8",
+      "background": "#000E1A"
+    },
+    {
+      "name": "diff.deleted",
+      "scope": "markup.deleted",
+      "foreground": "#F8F8F8",
+      "background": "#4C0900"
+    },
+    {
+      "name": "diff.changed",
+      "scope": "markup.changed",
+      "foreground": "#F8F8F8",
+      "background": "#806F00"
+    },
+    {
+      "name": "diff.inserted",
+      "scope": "markup.inserted",
+      "foreground": "#F8F8F8",
+      "background": "#154F00"
+    },
+    {
+      "name": "Constant (other variable)",
+      "scope": "variable.other.constant, support.class",
+      "foreground": "#FF6C5C"
+    },
+    {
+      "name": "Ruby: Symbol",
+      "scope": "constant.other.symbol.ruby",
+      "foreground": "var(markboard-red)"
+    },
+    {
+      "name": "Variable",
+      "scope": "variable.language, variable.other, variable.parameter",
+      "foreground": "#8F9CC4"
+    },
+    {
+      "name": "JSON - Level 4 Key",
+      "scope": "source.json meta.structure.dictionary.value meta.structure.dictionary.value meta.structure.dictionary.value meta.structure.dictionary.key string",
+      "foreground": "#CF5E00"
+    },
+    {
+      "name": "JSON - Level 4 Value",
+      "scope": "source.json meta.structure.dictionary.value meta.structure.dictionary.value meta.structure.dictionary.value meta.structure.dictionary.value string",
+      "foreground": "#A34A00"
+    },
+    {
+      "name": "JSON - Level 3 Key",
+      "scope": "source.json meta.structure.dictionary.value meta.structure.dictionary.value meta.structure.dictionary.key string",
+      "foreground": "#B37AFF"
+    },
+    {
+      "name": "JSON - Level 3 Value",
+      "scope": "source.json meta.structure.dictionary.value meta.structure.dictionary.value meta.structure.dictionary.value string",
+      "foreground": "#9C52FF"
+    },
+    {
+      "name": "JSON - Level 2 Key",
+      "scope": "source.json meta.structure.dictionary.value meta.structure.dictionary.key string",
+      "foreground": "#ABABFF"
+    },
+    {
+      "name": "JSON - Level 2 Value",
+      "scope": "source.json meta.structure.dictionary.value meta.structure.dictionary.value string",
+      "foreground": "#8383FF"
+    },
+    {
+      "name": "JSON - Level 1 Key",
+      "scope": "source.json meta.structure.dictionary.key string",
+      "foreground": "#10C210"
+    },
+    {
+      "name": "JSON - Level 1 Value",
+      "scope": "source.json meta.structure.dictionary.value string",
+      "foreground": "#109210"
+    }
+  ]
+}

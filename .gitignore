@@ -6,3 +6,5 @@ Package Control.*
 *.chback
 *.cache
 *.tmp
+*.crt
+*.status

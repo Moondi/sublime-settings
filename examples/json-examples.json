@@ -1,0 +1,28 @@
+{
+  "level 1 key": "level 1 value",
+  "level 1 object": { "level 2 key": "level 2 value" },
+  "level 1 array": [
+    "level 1 value",
+    "level 1 value",
+    { "level 2 key": "level 2 value" },
+    { "level 2 oject": { "level 3 key": "level 3 value" } },
+    { "level 2 array": [
+        "level 2 value",
+        "level 2 value",
+        { "level 3 key": "level 3 value" },
+        { "level 3 oject": { "level 4 key": "level 4 value" } },
+        { "level 3 array": [
+            "level 3 value",
+            "level 3 value",
+            { "level 4 key": "level 4 value" },
+            { "level 4 array": [
+                "level 4 value",
+                "level 4 value"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

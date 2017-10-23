@@ -19,7 +19,7 @@
     #FFFFFF - white
 
   reds
-    #D12F1D - thunderbird
+    #D12F1D - thunderbird-red
     #DD3E2A - markboard-red
 
   greens
@@ -44,7 +44,7 @@
       <dict>
         <!-- GENERAL -->
         <key>foreground</key>                <string>#CCCCCC</string>
-        <key>background</key>                <string>#272822</string>
+        <key>background</key>                <string>#31332D</string>
         <key>accent</key>                    <string>#0088FF</string>
         <key>caret</key>                     <string>#FFFFFF</string>
         <key>lineHighlight</key>             <string>#000000</string>
