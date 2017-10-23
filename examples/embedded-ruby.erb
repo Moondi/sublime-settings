@@ -1,0 +1,261 @@
+<head><title><%= @export_filename %></title></head>
+<% @students.each do |student| %>
+  <header>
+    <div class='left-content'>
+      <div class='section-identity'><%= @owner.name %></div>
+    </div>
+    <% if @settings[:signature] == 'true' %>
+      <div class='parent-signature'>
+        <div class='signature-box'></div>
+        <div class='label-text'>Parent Signature</div>
+      </div>
+    <% end %>
+  </header>
+  <div class='report-information'>
+    <div class='student-identity'>
+      <%= "#{student.first_name} #{student.last_name}" %>
+      <div class='student-id'>Student ID: <%= student.external_id %></div>
+    </div>
+    <div class='report-info'>
+      <div class='semester-name'><%= @admin_semester.name %></div>
+      <% if @assessment_grading_periods.length == 0 %>
+        <div class='report-date'><%= @start_date.strftime('%B %-d, %Y') %> - <%= @end_date.strftime('%B %-d, %Y') %></div>
+      <% end %>
+    </div>
+  </div>
+  <div class='section-title'>Grade Summary</div>
+
+  <% student_sections = student.enrollments.includes(section: [:evaluations, :classlist, :grading_period_averages]).where.not(section_id: nil).map do |enrollment| %>
+    <% if enrollment.section&.evaluations&.length > 0 %>
+      <% if @term.present? %>
+        <% enrollment.section if enrollment.section&.classlist&.term_id == @term.id %>
+      <% else %>
+        <% enrollment.section if enrollment.section&.classlist&.admin_semester_id == @admin_semester.id %>
+      <% end %>
+    <% end %>
+  <% end.compact.sort_by { |section| section.classlist.name } %>
+
+  <% if @term.present? %>
+    <% student_grading_period_averages = student_sections.map do |section| %>
+      <% section.grading_period_averages&.select { |gpa| @average_grading_periods.map(&:id).include?(gpa.grading_period_id) } %>
+    <% end.flatten %>
+  <% end %>
+
+  <% format_grade = ->(decimal_average, section) do %>
+    <% decimal_average = decimal_average.round(2) %>
+    <% if section.semester.grading_scale.id == 1 %>
+      <% return "%g" % decimal_average + '%' %>
+    <% end %>
+    <% scale = section.semester.grading_scale.scale.sort { |a,b| a[1].to_f <=> b[1].to_f } %>
+    <% output_value = scale.first[0] %>
+    <% scale.each do |interval| %>
+      <% if decimal_average >= interval[1].to_f %>
+        <% output_value = interval[0] %>
+      <% end %>
+    <% end %>
+    <% "%g" % decimal_average + '%' + ' (' + output_value + ')' %>
+  <% end %>
+
+  <% ordered_average_columns = [] %>
+  <% @reporting_groups.each do |rg| %>
+    <% ordered_average_columns << rg %>
+    <% @average_grading_periods.each do |gp| %>
+      <% ordered_average_columns << gp if gp.reporting_group_id == rg.id %>
+    <% end %>
+  <% end %>
+
+  <% @average_grading_periods.each { |gp| ordered_average_columns << gp unless ordered_average_columns.include?(gp) } %>
+
+  <% number_of_tables = ((ordered_average_columns.length + 1)/7.to_f).ceil %>
+  <% number_of_tables.times do %>
+    <% filtered_ordered_average_columns = ordered_average_columns.shift(6) %>
+    <% number_of_tables -= 1 %>
+    <table class='student-averages-table'>
+      <tr class='title'>
+        <th class='section-name'>Class</th>
+        <% filtered_ordered_average_columns.each do |average_column| %>
+          <th class='grading-period'><%= average_column.name %></th>
+        <% end %>
+        <% if number_of_tables == 0 && @is_showing_overall %>
+          <th class='overall'>Overall</th>
+        <% end %>
+      </tr>
+      <% student_sections.each do |section| %>
+        <tr class='section-row'>
+          <% subject_name = section.classlist.present? ? section.classlist.name : section.subject.name %>
+          <td class='section-name'><%= subject_name %> - <%= section.name %></td>
+          <% filtered_ordered_average_columns.each do |average_column| %>
+            <% enrollment = student.enrollments.detect{|e| e.section_id == section.id } %>
+            <% if average_column.class.name == 'GradingPeriod' %>
+              <% gp_average = student_grading_period_averages.detect { |sgpa| sgpa.enrollment_id == enrollment.id && sgpa.grading_period_id == average_column.id }&.average %>
+            <% else %>
+              <% grading_period_averages = student_grading_period_averages.select { |sgpa| sgpa.grading_period.reporting_group_id == average_column[:id] && sgpa.enrollment_id == enrollment.id } %>
+              <% gp_average = Calculators::GenericAverageCalculator.new(grading_period_averages.map(&:average)).calculate %>
+            <% end %>
+            <td class='grading-period'>
+              <% if gp_average.nil? %>
+                -
+              <% else %>
+                <%= format_grade.call gp_average, section %>
+              <% end %>
+            </td>
+          <% end %>
+          <% if number_of_tables == 0 %>
+            <% enrollment = student.enrollments.detect{ |e| e.section_id == section.id } %>
+            <% if @average_grading_periods.length > 0 && @average_grading_periods.length == section.term&.grading_periods&.length %>
+              <% average = enrollment.average %>
+            <% elsif @average_grading_periods.length > 0 %>
+              <% weighted_average_sum = 0.0 %>
+              <% average = Calculators::SelectedGradingPeriodsAverageCalculator.new(enrollment, @average_grading_periods).calculate %>
+            <% else %>
+              <% average = Calculators::EnrollmentDateRangeAverageCalculator.new(enrollment, section.categories, section.evaluations, section.evaluation_instances, @start_date, @end_date).calculate %>
+            <% end %>
+            <% if @is_showing_overall %>
+              <td class='overall'>
+                <% if average.nil? || average.nan? %>
+                  <div class='ungraded'>Ungraded</div>
+                <% else %>
+                  <%=format_grade.call average, section %>
+                <% end %>
+              </td>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
+
+  <% if @settings[:has_assessments] == 'true' %>
+    <div class='section-title'>Assessments</div>
+    <div class='assessments-container'>
+      <% student_sections.each do |section| %>
+        <% scale = section.semester.grading_scale.scale.sort { |a,b| a[1].to_f <=> b[1].to_f } %>
+        <div class='section-pill' style='background-color: #<%= section.color %>'></div>
+        <% subject_name = section.classlist.present? ? section.classlist.name : section.subject.name %>
+        <div class='section-name'><%= subject_name %> - <%= section.name %></div>
+        <% assessments = section.evaluations.select { |a| a.type != 'observation' && @start_date <= a.due && a.due <= @end_date } %>
+        <% if @assessment_grading_periods.length > 0 %>
+          <% assessments = @assessment_grading_periods.map { |gp| assessments.select { |a| gp.start_date <= a.due && a.due <= gp.end_date } }.flatten %>
+        <% end %>
+        <% if assessments.length == 0 %>
+          <div class='no-graded-assessments'>No Assessments Graded for This Student</div>
+        <% else %>
+          <table class='student-assessments'>
+            <tr class='assessment-row title'>
+              <td class='assessment-name'>Assessment Name</td>
+              <td class='assessment-due'>Due Date</td>
+              <td class='assessment-grade'>Grade</td>
+            </tr>
+            <% assessments.sort_by(&:due).reverse().each do |assessment| %>
+              <% instance = section.evaluation_instances.select{ |ei| ei.student_id == student.id && ei.evaluation_id == assessment.id }.sort_by{ |ei| ei.created_at }.last %>
+              <% unless instance.nil? %>
+                <tr class='assessment-row'>
+                  <td class='name'>
+                    <% if instance.overdue == 'Unsubmitted' %>
+                      <div class='unsubmitted-cell'>Unsubmitted</div>
+                    <% end %>
+                    <%= assessment.name %>
+                  </td>
+                  <td class='due'>
+                    <%= assessment.due.strftime('%b %-d, %Y') %>
+                  </td>
+                  <td class='grade'>
+                    <% if instance.omitted %>
+                      <div class='omitted'>Omitted</div>
+                    <% elsif instance.value.nil? && assessment.due > Time.now.midnight %>
+                      <div class='upcoming'>Upcoming</div>
+                    <% elsif instance.value.nil? %>
+                      <div class='ungraded'>Ungraded</div>
+                    <% elsif assessment.type == 'binary' %>
+                      <% if instance.value == 1 %>
+                        <img class='pass-icon'/>
+                      <% else %>
+                        <img class='fail-icon'/>
+                      <% end %>
+                    <% else %>
+                      <% if instance.raw_input.nil? %>
+                        <% output_value = scale.first[1] %>
+                        <% percentage = instance.value / assessment.out_of * 100 %>
+                        <% scale.each do |interval| %>
+                          <% if percentage >= interval[1].to_f %>
+                            <% output_value = interval[0] %>
+                          <% end %>
+                        <% end %>
+                      <% else %>
+                        <% output_value = instance.raw_input %>
+                      <% end %>
+                      <%= assessment.formatted_grade(instance.value) %> (<%= output_value %>)
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </table>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @settings[:has_attendance] == 'true' %>
+    <div class='attendance-container'>
+      <div class='section-title'>Attendance</div>
+      <% if @settings[:is_detailed_attendance] == 'false' %>
+        <table class='student-attendance-summary'>
+          <tr class='title'>
+            <td class='section-name'>Class</td>
+            <td class='absences'>Absences</td>
+            <td class='late'>Lates</td>
+          </tr>
+        </table>
+      <% end %>
+      <% student_sections.each do |section| %>
+        <% attendances = section.daily_attendances.select{ |da| da.student_id == student.id } %>
+          <table class='student-attendance-summary'>
+            <% if @settings[:is_detailed_attendance] == 'true' %>
+              <tr class='title'>
+                <td class='section-name'>Class</td>
+                <td class='absences'>Absences</td>
+                <td class='late'>Lates</td>
+              </tr>
+            <% else %>
+              <tr class='title'/>
+            <% end %>
+            <tr>
+              <% subject_name = section.classlist.present? ? section.classlist.name : section.subject.name %>
+              <td class='section-name'><%= subject_name %> - <%= section.name %></td>
+              <td class='absences'>
+                <%= attendances.select{ |a| !a.present }.length %>
+              </td>
+              <td class='late'>
+                <%= attendances.select{ |a| a.present && a.reason == 'Late'}.length %>
+              </td>
+            </tr>
+          </table>
+          <% if @settings[:is_detailed_attendance] == 'true' %>
+            <table class='student-attendance-detailed'>
+            <tr class='title'>
+              <td class='date'>Date</td>
+              <td class='type'>Absent / Late</td>
+              <td class='reason'>Reason</td>
+            </tr>
+            <% attendances.select{ |a| !a.present || a.reason == 'Late' }.sort_by(&:date).reverse().each do |attendance| %>
+              <tr class='attendance-row'>
+                <td class='date'>
+                  <%= attendance.date.strftime('%b, %-d %Y') %>
+                </td>
+                <td class='type'>
+                  <%= !attendance.present ? 'Absent' : 'Late' %>
+                </td>
+                <td class='reason'>
+                  <%= attendance.reason&.squish.empty? || attendance.reason == 'Late' ? '-' : attendance.reason %>
+                </td>
+              </tr>
+            <% end %>
+          </table>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+
+<%= render template: 'export/layouts/base.pdf.erb', locals: { stylesheet: 'admin/student_report.css' } %>

@@ -15,6 +15,7 @@
 		"CJSX Syntax",
 		"CSS Comments",
 		"CSS3",
+		"Dockerfile Syntax Highlighting",
 		"EditorConfig",
 		"Handlebars",
 		"MarkdownLivePreview",
@@ -30,6 +31,7 @@
 		"SCSS",
 		"SublimeERB",
 		"ThemeTweaker",
+		"TOML",
 		"VBScript"
 	],
 	"repositories":
