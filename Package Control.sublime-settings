@@ -39,8 +39,7 @@
 		"SublimeLinter",
 		"SublimeLinter-stylelint",
 		"ThemeTweaker",
-		"TOML",
-		"VBScript"
+		"TOML"
 	],
 	"repositories":
 	[
