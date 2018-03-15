@@ -7,6 +7,10 @@
 	"in_process_packages":
 	[
 	],
+	"install_prereleases":
+	[
+		"SublimeLinter"
+	],
 	"installed_packages":
 	[
 		"Alignment",
@@ -30,6 +34,8 @@
 		"ScopeHunter",
 		"SCSS",
 		"SublimeERB",
+		"SublimeLinter",
+		"SublimeLinter-stylelint",
 		"ThemeTweaker",
 		"TOML",
 		"VBScript"

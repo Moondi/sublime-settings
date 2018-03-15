@@ -7,6 +7,10 @@
 
   { "keys": ["super+shift+."], "command": "erb" },
 
+  // re-define alignment, as sublime linter overrides it
+  { "keys": ["super+ctrl+a"], "command": "alignment" },
+  { "keys": ["alt+1"], "command": "sublime_linter_panel_toggle" },
+
   { "keys": ["shift+alt+d"], "command": "schemr_cycle_favorite_schemes", "args": {"direction": "next"}},
 
   // HTML, XML close tag - barely working in coffeescript. Works for 'div' and nothing else that I've seen so far

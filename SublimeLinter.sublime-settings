@@ -1,0 +1,6 @@
+// SublimeLinter Settings - User
+{
+
+  "debug": true,
+  "lint_mode": "load_save"
+}
