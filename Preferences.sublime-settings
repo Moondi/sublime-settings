@@ -5,6 +5,7 @@
 	"auto_complete_with_fields": true,
 	"bold_folder_labels": true,
 	"color_scheme": "Packages/User/color_schemes/Moose v3.sublime-color-scheme",
+	"default_line_ending": "unix",
 	"drag_text": false,
 	"enable_tab_scrolling": false,
 	"ensure_newline_at_eof_on_save": true,
