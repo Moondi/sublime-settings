@@ -35,6 +35,7 @@
 		"SCSS",
 		"SublimeERB",
 		"SublimeLinter",
+		"SublimeLinter-rubocop",
 		"SublimeLinter-stylelint",
 		"ThemeTweaker",
 		"TOML"
