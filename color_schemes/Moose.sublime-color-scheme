@@ -269,42 +269,42 @@
     },
     {
       "name": "JSON - Level 4 Key",
-      "scope": "source.json meta.structure.dictionary.value meta.structure.dictionary.value meta.structure.dictionary.value meta.structure.dictionary.key string",
+      "scope": "source.json meta.mapping.value meta.mapping.value meta.mapping.value meta.mapping.key string",
       "foreground": "#CF5E00"
     },
     {
       "name": "JSON - Level 4 Value",
-      "scope": "source.json meta.structure.dictionary.value meta.structure.dictionary.value meta.structure.dictionary.value meta.structure.dictionary.value string",
+      "scope": "source.json meta.mapping.value meta.mapping.value meta.mapping.value meta.mapping.value string",
       "foreground": "#A34A00"
     },
     {
       "name": "JSON - Level 3 Key",
-      "scope": "source.json meta.structure.dictionary.value meta.structure.dictionary.value meta.structure.dictionary.key string",
+      "scope": "source.json meta.mapping.value meta.mapping.value meta.mapping.key string",
       "foreground": "#B37AFF"
     },
     {
       "name": "JSON - Level 3 Value",
-      "scope": "source.json meta.structure.dictionary.value meta.structure.dictionary.value meta.structure.dictionary.value string",
+      "scope": "source.json meta.mapping.value meta.mapping.value meta.mapping.value string",
       "foreground": "#9C52FF"
     },
     {
       "name": "JSON - Level 2 Key",
-      "scope": "source.json meta.structure.dictionary.value meta.structure.dictionary.key string",
+      "scope": "source.json meta.mapping.value meta.mapping.key string",
       "foreground": "#ABABFF"
     },
     {
       "name": "JSON - Level 2 Value",
-      "scope": "source.json meta.structure.dictionary.value meta.structure.dictionary.value string",
+      "scope": "source.json meta.mapping.value meta.mapping.value string",
       "foreground": "#8383FF"
     },
     {
       "name": "JSON - Level 1 Key",
-      "scope": "source.json meta.structure.dictionary.key string",
+      "scope": "source.json meta.mapping.key string",
       "foreground": "#10C210"
     },
     {
       "name": "JSON - Level 1 Value",
-      "scope": "source.json meta.structure.dictionary.value string",
+      "scope": "source.json meta.mapping.value string",
       "foreground": "#109210"
     }
   ]
