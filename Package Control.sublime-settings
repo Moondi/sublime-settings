@@ -23,6 +23,7 @@
 		"EditorConfig",
 		"Handlebars",
 		"MarkdownLivePreview",
+		"MarkdownPreview",
 		"OverrideAudit",
 		"Package Control",
 		"PackageDev",
