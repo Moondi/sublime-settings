@@ -3,10 +3,18 @@
 # http://www.sublimetext.com/docs/3/syntax.html
 
 name: CoffeeScript
-comment: "CoffeeScript Syntax: version 1.01"
+comment: "CoffeeScript Syntax: version 2.x - WIP - slowly modifying as I come across bits that annoy me"
 file_extensions: [ coffee, Cakefile, cson ]
 first_line_match: ^#!.*\bcoffee
 scope: source.coffee
+
+variables:
+  identifier_start: '[_$\p{L}\p{Nl}]' # Taken from javascript
+  identifier_part: '[_$\p{L}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}\x{200C}\x{200D}]' # Taken from javascript
+  identifier_break: (?!{{identifier_part}}) # Taken from javascript
+
+  identifier: '{{identifier_start}}{{identifier_part}}*{{identifier_break}}' # Taken from javascript
+  constant_identifier: '[[:upper:]]{{identifier_part}}*{{identifier_break}}' # Taken from javascript
 
 contexts:
   main:
@@ -28,6 +36,7 @@ contexts:
     - include: line-comment
     - include: block-regex
     - include: regex
+    - include: keywords-top-level # taken from javascript
     - match: |-
         (?x)
           \b(?<![\.\$])(
@@ -149,7 +158,178 @@ contexts:
     - include: literal-string
     - include: numeric
 
+  # ------------------------------#
+  # START - Taken from javascript #
+  # ------------------------------#
+  else-pop:
+    - match: (?=\S)
+      pop: true
 
+  immediately-pop:
+    - match: ''
+      pop: true
+
+  comma-separator:
+    - match: ','
+      scope: punctuation.separator.comma.coffee
+
+  keywords-top-level:
+    - match: import{{identifier_break}}
+      scope: keyword.control.import-export.coffee
+      push:
+        - import-meta
+        - import-export-final
+        - import-extended
+
+    - match: export{{identifier_break}}
+      scope: keyword.control.import-export.coffee
+      push:
+        - export-meta
+        # - export-extended
+
+    - match: (?:export|default|from|as){{identifier_break}}
+      scope: keyword.control.import-export.coffee
+
+  import-meta:
+    - meta_scope: meta.import.coffee
+    - include: immediately-pop
+
+  import-export-alias:
+    - match: as{{identifier_break}}
+      scope: keyword.control.import-export.coffee
+      set:
+        - match: default{{identifier_break}}
+          scope: keyword.control.import-export.coffee
+          pop: true
+        - match: '{{identifier}}'
+          scope: variable.other.readwrite.coffee
+          pop: true
+        - include: else-pop
+    - include: else-pop
+
+  # MODIFIED - removed the string lookahead, as it wasn't popping the meda.import scope off
+  # - changling literal-string to use `set` over `push` worked as well, but mucked with scoping elsewhere
+  import-export-final:
+    - match: 'from{{identifier_break}}'
+      scope: keyword.control.import-export.coffee
+    - include: literal-string
+    - include: else-pop
+
+  import-extended:
+    - match: (?='|")
+      pop: true
+    - match: (?=\S)
+      set:
+        - import-list
+        - import-export-alias
+        - import-item
+
+  import-list:
+    - match: ','
+      scope: punctuation.separator.comma.coffee
+      push:
+        - import-export-alias
+        - import-item
+    - include: else-pop
+
+  import-item:
+    - match: '\{'
+      scope: punctuation.section.block.coffee
+      set: import-brace
+    - match: '{{identifier}}'
+      scope: variable.other.readwrite.coffee
+      pop: true
+    - match: '\*'
+      scope: constant.other.coffee
+      pop: true
+    - include: else-pop
+
+  import-brace:
+    - meta_scope: meta.block.coffee
+    - include: comma-separator
+    - match: '\}'
+      scope: punctuation.section.block.coffee
+      pop: true
+    - match: '{{identifier}}'
+      scope: variable.other.readwrite.coffee
+      push: import-export-alias
+    - match: '\*'
+      scope: constant.other.coffee
+      push: import-export-alias
+    - include: else-pop
+
+  export-meta:
+    - meta_scope: meta.export.coffee
+    - include: immediately-pop
+
+  # export-extended:
+  #   - match: (?:const|let|var){{identifier_break}}
+  #     scope: storage.type.coffee
+  #     set: expression-statement
+
+  #   - match: (?=class{{identifier_break}})
+  #     set: class
+
+  #   - match: (?={{func_lookahead}})
+  #     set: function-declaration
+
+  #   - match: 'default{{identifier_break}}'
+  #     scope: keyword.control.import-export.coffee
+  #     set:
+  #       - match: (?=class{{identifier_break}})
+  #         set: class
+
+  #       - match: (?={{func_lookahead}})
+  #         set: function-declaration
+
+  #       - match: (?=\S)
+  #         set: expression-statement
+
+  #   - match: (?=\S)
+  #     set:
+  #       - import-export-final
+  #       - export-list
+  #       - import-export-alias
+  #       - export-item
+
+  export-list:
+    - match: ','
+      scope: punctuation.separator.comma.coffee
+      push:
+        - import-export-alias
+        - export-item
+    - include: else-pop
+
+  export-item:
+    - match: '\{'
+      scope: punctuation.section.block.coffee
+      set:
+        - export-brace
+    - match: '{{identifier}}'
+      scope: variable.other.readwrite.coffee
+      pop: true
+    - match: '\*'
+      scope: constant.other.coffee
+      pop: true
+    - include: else-pop
+
+  export-brace:
+    - meta_scope: meta.block.coffee
+    - include: comma-separator
+    - match: '\}'
+      scope: punctuation.section.block.coffee
+      pop: true
+    - match: '{{identifier}}'
+      scope: variable.other.readwrite.coffee
+      push: import-export-alias
+    - match: '\*'
+      scope: constant.other.coffee
+      push: import-export-alias
+    - include: else-pop
+
+  # ----------------------------#
+  # END - Taken from javascript #
+  # ----------------------------#
 
   # Shared Contexts
   instance-variable:
