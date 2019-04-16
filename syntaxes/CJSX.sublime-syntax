@@ -69,8 +69,7 @@ contexts:
           scope: entity.other.attribute-name.cjsx
         - match: '='
           scope: keyword.operator.assignment.cjsx
-        - include: single-quoted-string
-        - include: double-quoted-string
+        - include: literal-string
         - include: embedded-cjsx
 
   escaped-character:
@@ -106,7 +105,7 @@ contexts:
           pop: true
         - include: 'scope:source.coffee'
 
-  single-quoted-string:
+  literal-string:
     - match: "'"
       scope: punctuation.definition.string.begin.cjsx
       push:
@@ -116,8 +115,6 @@ contexts:
           pop: true
         - include: escaped-character
         - include: html-entity
-
-  double-quoted-string:
     - match: '"'
       scope: punctuation.definition.string.begin.cjsx
       push:
