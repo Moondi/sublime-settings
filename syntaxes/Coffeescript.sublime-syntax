@@ -146,8 +146,7 @@ contexts:
     - match: '\[|\]\s*'
       scope: meta.brace.square.coffee
     - include: instance-variable
-    - include: single-quoted-string
-    - include: double-quoted-string
+    - include: literal-string
     - include: numeric
 
 
@@ -179,9 +178,6 @@ contexts:
         3: punctuation.definition.entity.end.coffee
     - match: '&'
       scope: invalid.illegal.bad-ampersand.coffee
-
-
-
 
   # Contexts separated out for readability
   # Make sure there are (at least some) tests for each of these
@@ -276,7 +272,7 @@ contexts:
           scope: variable.assignment.coffee
         - include: instance-variable
 
-  single-quoted-string:
+  literal-string:
     - match: "'"
       scope: punctuation.definition.string.begin.coffee
       push:
@@ -286,8 +282,6 @@ contexts:
           pop: true
         - include: escaped-character
         - include: html-entity
-
-  double-quoted-string:
     - match: '"'
       scope: punctuation.definition.string.begin.coffee
       push:
